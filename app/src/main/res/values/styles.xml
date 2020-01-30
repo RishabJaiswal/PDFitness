@@ -1,11 +1,35 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
+    <!--base elevated button-->
+    <style name="BaseButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">@dimen/base_corner_radius</item>
+        <item name="fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textSize">@dimen/txt_body</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">@dimen/base_corner_radius</item>
+        <item name="fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textSize">@dimen/txt_body</item>
+    </style>
+
+    <style name="filledElevatedButton" parent="BaseButton">
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>
