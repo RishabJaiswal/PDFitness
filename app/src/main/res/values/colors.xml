@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#5b1e5d</color>
+    <color name="colorPrimary">@color/lipstick</color>
+    <color name="colorPrimaryDark">@color/tomato</color>
+    <color name="colorAccent">@color/grapePurple</color>
     <color name="textPrimary">#CC000000</color>
+    <color name="textSecondary">#7A000000</color>
+    <color name="textDisabled">#54000000</color>
+
+    <!--6 colors of the brand-->
+    <!--primaries-->
+    <color name="lipstick">#d5145b</color>
+    <color name="tomato">#ed4822</color>
+    <color name="squash">#f5b20c</color>
+
+    <!--secondaries-->
+    <color name="grapePurple">#5b1e5d</color>
+    <color name="berry">#9e1660</color>
+    <color name="pumpkinOrange">#f48617</color>
 </resources>
