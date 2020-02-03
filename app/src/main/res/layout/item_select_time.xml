@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/colorAccent"
+    android:gravity="center"
+    android:layout_marginBottom="16dp">
+
+    <!--select time-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_time"
+        style="@style/filledElevatedButton"
+        android:backgroundTint="@color/berry"
+        tools:text="6 : 00 am"/>
+
+    <!--price-->
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="₹ 1200"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>

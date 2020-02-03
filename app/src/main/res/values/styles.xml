@@ -12,7 +12,7 @@
     <!--base elevated button-->
     <style name="BaseButton" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
         <item name="cornerRadius">@dimen/base_corner_radius</item>
         <item name="fontFamily">@font/montserrat_semibold</item>
         <item name="android:textSize">@dimen/txt_body</item>
@@ -25,17 +25,49 @@
 
     <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
         <item name="cornerRadius">@dimen/base_corner_radius</item>
         <item name="android:textSize">@dimen/txt_body</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
-        <item name="fontFamily">@font/montserrat_semibold</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
     </style>
 
     <style name="filledElevatedButton" parent="BaseButton">
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--base edit text box-->
+    <style name="baseEditText" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textSize">@dimen/txt_body</item>
+        <item name="android:textColorHint">@color/textDarkDisabled</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:background">@drawable/rectangle_rc_10_accent</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <!--profile widget styling-->
+    <style name="profileTitles">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/grapePurple</item>
+    </style>
+
+    <style name="editProfileTitle" parent="profileTitles">
+        <item name="android:textSize">@dimen/txt_24</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+    </style>
+
+    <style name="editProfileSubTitle" parent="profileTitles">
+        <item name="android:textSize">@dimen/txt_title</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:alpha">0.7</item>
+        <item name="android:layout_marginTop">16dp</item>
     </style>
 
 </resources>

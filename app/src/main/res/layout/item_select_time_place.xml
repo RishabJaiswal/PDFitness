@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp">
+
+    <!--price to be paid-->
+    <TextView
+        android:id="@+id/tv_price_to_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_rc_10_accent"
+        android:backgroundTint="@color/squash"
+        android:elevation="2dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:paddingStart="18dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="2dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txt_caption"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="₹ 1800 to be paid"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="203dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rectangle_rc_10_accent"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_price_to_pay">
+
+        <!--place-->
+        <TextView
+            android:id="@+id/tv_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:gravity="center"
+            android:paddingStart="28dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="28dp"
+            android:paddingBottom="16dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txt_body"
+            tools:text="Tower 5, Blue Ridge, \nHinjawadi Phase 1" />
+
+        <!--divider-->
+        <View
+            android:layout_width="101dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center_horizontal"
+            android:alpha="0.4"
+            android:background="#000" />
+
+        <!--directions-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_directions"
+            style="@style/TextButton"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/directions"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txt_caption" />
+
+        <!--divider-->
+        <View
+            android:layout_width="101dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center_horizontal"
+            android:alpha="0.4"
+            android:background="#000" />
+
+        <!--time and price-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_time_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_select_time" />
+
+        <!--choose diet plan-->
+        <com.google.android.material.button.MaterialButton
+            style="@style/filledElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/berry"
+            android:text="@string/select_diet_plan"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <!--next button-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next_edit_time_place"
+        style="@style/filledElevatedButton"
+        android:text="@string/action_next"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

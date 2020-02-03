@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
+    android:gravity="center">
+
+    <!--title-->
+    <TextView
+        style="@style/editProfileTitle"
+        android:text="@string/edit_name_title"/>
+
+
+    <!--subtitle-->
+    <TextView
+        style="@style/editProfileSubTitle"
+        android:text="@string/edit_name_subtitle"/>
+
+    <!--enter name here-->
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        style="@style/baseEditText"
+        android:hint="@string/hint_enter_name"
+        android:layout_marginTop="16dp"/>
+
+    <!--next button-->
+    <com.google.android.material.button.MaterialButton
+        style="@style/filledElevatedButton"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="end"
+        android:text="@string/action_next"/>
+
+</LinearLayout>

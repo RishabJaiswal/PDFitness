@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_enter_name">enter your name</string>
+    <string name="edit_name_title">Your name</string>
+    <string name="edit_name_subtitle">The name of the game is to lead without title</string>
+
+    <string name="edit_time_place_title">Time &amp; place</string>
+    <string name="edit_time_place_subtitle">Where &amp; when would you like to train? Please select one of the options</string>
+
+
+    <string name="directions">Directions</string>
+    <string name="select_diet_plan">Choose a diet plan</string>
+
+    <string name="edit_profile_done_title">You are awesome!</string>
+    <string name="edit_profile_done_subtitle">We wanted you to know that you are awesome for selecting a healthy and fruitful lifestyle. Your profile will be updated soon.</string>
+    <string name="take_me_home">Cool, take me home</string>
+</resources>

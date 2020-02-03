@@ -1,0 +1,29 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp">
+
+
+    <!--title-->
+    <TextView
+        style="@style/editProfileTitle"
+        android:text="@string/edit_profile_done_title" />
+
+    <!--subtitle-->
+    <TextView
+        style="@style/editProfileSubTitle"
+        android:text="@string/edit_profile_done_subtitle" />
+
+    <!--take home-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_take_home"
+        style="@style/filledElevatedButton"
+        android:layout_marginTop="32dp"
+        android:textAllCaps="false"
+        android:text="@string/take_me_home"/>
+
+</LinearLayout>

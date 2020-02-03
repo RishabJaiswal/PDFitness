@@ -3,9 +3,16 @@
     <color name="colorPrimary">@color/lipstick</color>
     <color name="colorPrimaryDark">@color/tomato</color>
     <color name="colorAccent">@color/grapePurple</color>
+
+    <!--text colors-->
+    <!--light-->
     <color name="textPrimary">#CC000000</color>
     <color name="textSecondary">#7A000000</color>
     <color name="textDisabled">#54000000</color>
+    <!--dark-->
+    <color name="textDarkPrimary">#FFFFFF</color>
+    <color name="textDarkSecondary">#B3FFFFFF</color>
+    <color name="textDarkDisabled">#4DFFFFFF</color>
 
     <!--6 colors of the brand-->
     <!--primaries-->
