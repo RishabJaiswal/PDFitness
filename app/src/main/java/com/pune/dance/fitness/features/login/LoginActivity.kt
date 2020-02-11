@@ -1,10 +1,10 @@
 package com.pune.dance.fitness.features.login
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.pune.dance.fitness.R
+import com.pune.dance.fitness.application.BaseActivity
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
