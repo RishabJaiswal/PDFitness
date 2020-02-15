@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "49103952239",
+    "firebase_url": "https://pune-dance-fitness.firebaseio.com",
+    "project_id": "pune-dance-fitness",
+    "storage_bucket": "pune-dance-fitness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49103952239:android:a4ee8b0a9f233a231bb09a",
+        "android_client_info": {
+          "package_name": "com.pune.dance.fitness.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49103952239-47h6j3e05ef3gj5t8fucic1m2haqcsvj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB8YJSkKxWzFUou0cM0ah-oSnOnMV_omo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49103952239-47h6j3e05ef3gj5t8fucic1m2haqcsvj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
