@@ -18,6 +18,7 @@
         app:layout_constraintStart_toEndOf="@+id/tv_login_label"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
+    <!--dashed circle-->
     <ImageView
         android:id="@+id/imv_bg_circle"
         android:layout_width="0dp"
@@ -28,6 +29,13 @@
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/art_login_dancer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     l<!--login label-->
     <TextView
@@ -81,7 +89,27 @@
         app:layout_constraintStart_toStartOf="@+id/edt_mobile_no"
         app:layout_constraintTop_toTopOf="@+id/btn_login" />
 
+    <!--send otp-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_get_otp"
+        style="@style/filledElevatedButton"
+        android:backgroundTint="#335B1E5D"
+        android:textColor="@color/grapePurple"
+        android:text="get OTP"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/edt_mobile_no"
+        app:layout_constraintTop_toBottomOf="@+id/edt_mobile_no" />
+
     <!--login button-->
+    <ProgressBar
+        android:id="@+id/pb_get_otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/edt_mobile_no"
+        app:layout_constraintTop_toBottomOf="@+id/edt_mobile_no" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login"
         style="@style/filledElevatedButton"
@@ -119,13 +147,21 @@
     <!--terms and consitions-->
     <com.google.android.material.button.MaterialButton
         style="@style/TextButton"
-        android:text="@string/label_terms"
-        android:textColor="@color/textSecondary"
-        android:textAllCaps="false"
-        android:textSize="@dimen/txt_caption"
         android:fontFamily="@font/montserrat"
+        android:text="@string/label_terms"
+        android:textAllCaps="false"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/txt_caption"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/edt_otp" />
+        app:layout_constraintStart_toStartOf="@+id/tv_login_label" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_login_views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:constraint_referenced_ids="edt_otp, btn_resend_otp ,btn_login" />
 
     <!--guideline-->
     <androidx.constraintlayout.widget.Guideline

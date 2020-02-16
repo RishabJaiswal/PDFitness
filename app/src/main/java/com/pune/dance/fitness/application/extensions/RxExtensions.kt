@@ -1,5 +1,7 @@
 package com.pune.dance.fitness.application.extensions
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -27,6 +29,11 @@ fun <T> Single<T>.subscribeOnBackObserverOnMain(): Single<T> {
 fun Completable.subscribeOnBackObserverOnMain(): Completable {
     return this.subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
+}
+
+//Rx streams to LiveData
+fun <T> Single<T>.toLiveData(): LiveData<T> {
+    return LiveDataReactiveStreams.fromPublisher(this.toFlowable())
 }
 
 fun Disposable.addTo(disposable: CompositeDisposable) {
