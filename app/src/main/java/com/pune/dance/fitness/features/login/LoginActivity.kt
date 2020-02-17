@@ -3,13 +3,11 @@ package com.pune.dance.fitness.features.login
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.pune.dance.fitness.BuildConfig
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.BaseActivity
-import com.pune.dance.fitness.application.extensions.configureViewModel
-import com.pune.dance.fitness.application.extensions.gone
-import com.pune.dance.fitness.application.extensions.invisible
-import com.pune.dance.fitness.application.extensions.visible
+import com.pune.dance.fitness.application.extensions.*
 import com.pune.dance.fitness.features.profile.edit.EditProfileActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -29,16 +27,16 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         viewModel.verificationTokenLiveResult.observe(this, Observer {
             it.parseResult({
                 //loading
-                pb_get_otp.visible()
-                btn_get_otp.gone()
+                toggleGetOtpViews(isVisible = false)
             }, {
                 //success
-                pb_get_otp.gone()
-                group_login_views.visible()
-            }, {
+                toggleLoginViews(isVisible = true)
+            }, { error ->
                 //error
-                pb_get_otp.gone()
-                btn_get_otp.visible()
+                toggleGetOtpViews(isVisible = true)
+                if (error is FirebaseAuthInvalidCredentialsException) {
+                    toast(R.string.error_invalid_mobile_no)
+                }
             })
         })
 
@@ -57,33 +55,54 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 pb_login.gone()
                 btn_login.visible()
                 btn_resend_otp.visible()
+                toast(R.string.error_invalid_otp)
             })
         })
     }
 
 
+    /**hide/show views to showcase LCE for views
+     * related to verifying OTP
+     * and logging user in*/
+    private fun toggleLoginViews(isVisible: Boolean) {
+        pb_get_otp.visibleOrGone(!isVisible)
+        btn_login.visibleOrGone(isVisible)
+        btn_resend_otp.visibleOrGone(isVisible)
+        edt_otp.visibleOrGone(isVisible)
+    }
+
+    /**hide/show views to showcase LCE for views
+     * related to getting OTP*/
+    private fun toggleGetOtpViews(isVisible: Boolean) {
+        pb_get_otp.visibleOrGone(!isVisible)
+        btn_get_otp.visibleOrGone(isVisible)
+    }
+
+
     private fun verifyPhoneNumber() {
         var mobileNo = edt_mobile_no.text.toString()
-        if (BuildConfig.DEBUG) {
+        if (mobileNo.isEmpty()) {
+            toast(R.string.error_invalid_mobile_no)
+        } else if (BuildConfig.DEBUG) {
+            //only while debugging
             mobileNo = "+911234560986"
         }
-        viewModel.verifyMobileNumber(mobileNo)
+        if (mobileNo.isNotEmpty()) {
+            viewModel.verifyMobileNumber(mobileNo)
+        }
     }
 
     private fun verifyOTP() {
         var otp = edt_otp.text.toString()
-        if (BuildConfig.DEBUG){
-            otp = "123456"
+        if (otp.isEmpty()) {
+            toast(R.string.error_invalid_otp)
+        } else if (BuildConfig.DEBUG) {
+            //only while debugging
+            otp = "1234560"
         }
-        viewModel.verifyOTP(otp)
-    }
-
-    fun showProgress() {
-        pb_login.visible()
-    }
-
-    fun hideProgress() {
-        pb_login.gone()
+        if (otp.isNotEmpty()) {
+            viewModel.verifyOTP(otp)
+        }
     }
 
     override fun onClick(view: View?) {
