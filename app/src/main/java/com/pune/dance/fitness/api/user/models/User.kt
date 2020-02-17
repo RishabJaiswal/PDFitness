@@ -1,6 +1,12 @@
 package com.pune.dance.fitness.api.user.models
 
-data class User(
-    //it is UID of Firebase user
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+
+class User : RealmObject() {
+
+    //UID of Firebase user
+    @PrimaryKey
     var id: String = ""
-)
+
+}
