@@ -3,6 +3,8 @@ package com.pune.dance.fitness.features.login
 import androidx.lifecycle.ViewModel
 import com.pune.dance.fitness.api.login.LoginApiManager
 import com.pune.dance.fitness.api.login.models.VerificationToken
+import com.pune.dance.fitness.api.user.UserApiManager
+import com.pune.dance.fitness.api.user.models.UserProfile
 import com.pune.dance.fitness.application.LiveResult
 import com.pune.dance.fitness.application.Result
 import com.pune.dance.fitness.application.extensions.addTo
@@ -10,6 +12,7 @@ import com.pune.dance.fitness.application.extensions.logError
 import com.pune.dance.fitness.data.UserDao
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 class LoginViewModel : ViewModel() {
 
@@ -20,7 +23,9 @@ class LoginViewModel : ViewModel() {
     private val loginApiManager by lazy {
         LoginApiManager()
     }
-
+    private val userApiManager by lazy {
+        UserApiManager()
+    }
     private val disposable = CompositeDisposable()
 
     //verifying number
@@ -46,7 +51,7 @@ class LoginViewModel : ViewModel() {
                     .doOnSubscribe { loginLiveResult.loading() }
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        loginLiveResult.success(true)
+                        getUser()
                     }, {
                         logError(throwable = it)
                         loginLiveResult.error(it)
@@ -54,6 +59,47 @@ class LoginViewModel : ViewModel() {
                     .addTo(disposable)
             }
         }
+    }
+
+    private fun getUser() {
+        userApiManager.getCurrentUser()
+            .map { user ->
+                UserDao().use {
+                    it.saveUser(user)
+                }
+                return@map user
+            }
+            .flatMap { user ->
+                userApiManager.getUserProfile(user.id)
+            }
+            .doOnSubscribe { }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                //save user profile
+                loginLiveResult.success(true)
+            }, { error ->
+                if (error is NullPointerException) {
+                    createUserProfile()
+                }
+            })
+            .addTo(disposable)
+    }
+
+    private fun createUserProfile() {
+        userApiManager.getCurrentUser()
+            .flatMap { user ->
+                val profile = UserProfile()
+                userApiManager.createUserProfile(user.id, profile)
+            }.doOnSubscribe { }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+                loginLiveResult.success(true)
+            }, { error ->
+                loginLiveResult.error(error)
+            })
+            .addTo(disposable)
     }
 
     override fun onCleared() {

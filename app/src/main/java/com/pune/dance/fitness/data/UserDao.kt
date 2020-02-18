@@ -2,32 +2,27 @@ package com.pune.dance.fitness.data
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.pune.dance.fitness.api.user.models.User
-import io.reactivex.Single
+import com.pune.dance.fitness.api.user.models.UserFields
+import io.realm.Realm
 import java.io.Closeable
 
-class UserDao : Closeable {
+class UserDao(val db: Realm = Realm.getDefaultInstance()) : Closeable {
 
     private val firestoreDB = FirebaseFirestore.getInstance()
 
-    fun getUser(userId: String): Single<User?> {
-        return Single.create { emitter ->
-            firestoreDB.collection("users")
-                .document(userId)
-                .get()
-                .addOnSuccessListener { documentSnapshot ->
-                    val user = documentSnapshot.toObject(User::class.java)
-                    emitter.onSuccess(user!!)
-                }
-                .addOnFailureListener {
-                    emitter.onError(it)
-                }
+    fun getUser(userId: String): User? {
+        return db.where(User::class.java)
+            .equalTo(UserFields.ID, userId)
+            .findFirst()
+    }
+
+    fun saveUser(user: User) {
+        db.executeTransaction { realm ->
+            realm.copyToRealmOrUpdate(user)
         }
     }
 
-    fun saveUser() {
-
-    }
-
     override fun close() {
+        db.close()
     }
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.login.LoginActivity">
+    tools:context=".features.login.LoginActivity"
+    android:animateLayoutChanges="true">
 
 
     <ImageView
@@ -57,12 +58,13 @@
     <EditText
         android:id="@+id/edt_mobile_no"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/rectangle_white_stroke_grey"
         android:hint="@string/login_first_field_label"
         android:padding="16dp"
         android:textSize="@dimen/txt_body"
+        android:fontFamily="@font/montserrat_semibold"
         android:inputType="phone"
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/btn_login"
@@ -76,14 +78,17 @@
     <EditText
         android:id="@+id/edt_otp"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rectangle_white_stroke_grey"
         android:hint="@string/login_field_password"
         android:padding="16dp"
         android:textSize="@dimen/txt_body"
+        android:fontFamily="@font/montserrat_semibold"
         android:inputType="textVisiblePassword"
         android:maxLines="1"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/btn_login"
         app:layout_constraintEnd_toStartOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="@+id/edt_mobile_no"
@@ -93,14 +98,14 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_get_otp"
         style="@style/filledElevatedButton"
-        android:backgroundTint="#335B1E5D"
+        android:backgroundTint="#D7CBD7"
         android:textColor="@color/grapePurple"
         android:text="get OTP"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/edt_mobile_no"
         app:layout_constraintTop_toBottomOf="@+id/edt_mobile_no" />
 
-    <!--login button-->
+    <!--login progress-->
     <ProgressBar
         android:id="@+id/pb_get_otp"
         android:layout_width="wrap_content"
@@ -110,6 +115,7 @@
         app:layout_constraintStart_toStartOf="@+id/edt_mobile_no"
         app:layout_constraintTop_toBottomOf="@+id/edt_mobile_no" />
 
+    <!--login button-->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login"
         style="@style/filledElevatedButton"
@@ -120,6 +126,8 @@
         android:paddingStart="0dp"
         android:paddingEnd="0dp"
         android:text="@string/login_button"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/edt_mobile_no" />
@@ -140,6 +148,8 @@
         android:layout_marginStart="24dp"
         android:text="@string/resend_otp"
         android:textColor="@color/textSecondary"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_otp" />
 
@@ -154,14 +164,6 @@
         android:textSize="@dimen/txt_caption"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_login_label" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_login_views"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:constraint_referenced_ids="edt_otp, btn_resend_otp ,btn_login" />
 
     <!--guideline-->
     <androidx.constraintlayout.widget.Guideline
