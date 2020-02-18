@@ -98,7 +98,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             toast(R.string.error_invalid_otp)
         } else if (BuildConfig.DEBUG) {
             //only while debugging
-            otp = "1234560"
+            otp = "123456"
         }
         if (otp.isNotEmpty()) {
             viewModel.verifyOTP(otp)

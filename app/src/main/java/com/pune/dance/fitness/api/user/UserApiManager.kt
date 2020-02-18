@@ -29,7 +29,6 @@ class UserApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThread()) 
                 })
             } ?: emitter.onError(NullPointerException("Firebase user not found"))
         }
-            .subscribeOn(scheduler)
     }
 
     //saving user profile
@@ -45,6 +44,19 @@ class UserApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThread()) 
                 }
                 .addOnFailureListener {
                     //error
+                    emitter.onError(it)
+                }
+        }
+    }
+
+    fun createUserProfile(userId: String, profile: UserProfile): Single<UserProfile> {
+        return Single.create<UserProfile> { emitter ->
+            firestoreDB.document("userProfile/${userId}")
+                .set(profile)
+                .addOnSuccessListener {
+                    emitter.onSuccess(profile)
+                }
+                .addOnFailureListener {
                     emitter.onError(it)
                 }
         }
