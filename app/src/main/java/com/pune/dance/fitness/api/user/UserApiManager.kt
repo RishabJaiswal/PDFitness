@@ -51,7 +51,7 @@ class UserApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThread()) 
 
     fun createUserProfile(userId: String, profile: UserProfile): Single<UserProfile> {
         return Single.create<UserProfile> { emitter ->
-            firestoreDB.document("userProfile/${userId}")
+            firestoreDB.document("user_profile/${userId}")
                 .set(profile)
                 .addOnSuccessListener {
                     emitter.onSuccess(profile)

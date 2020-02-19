@@ -16,6 +16,12 @@ class LiveResult<T> : MutableLiveData<Result<T>>() {
         value = Result.error(error)
     }
 
-    fun isSuccess() = this.value is Result.Success
+    fun getResult(): T? {
+        val resultValue = this.value
+        return if (resultValue is Result.Success) {
+            return resultValue.data
+
+        } else null
+    }
 
 }

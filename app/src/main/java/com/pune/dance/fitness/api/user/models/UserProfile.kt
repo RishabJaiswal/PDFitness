@@ -2,17 +2,18 @@ package com.pune.dance.fitness.api.user.models
 
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.PropertyName
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
+import io.realm.RealmModel
+import io.realm.annotations.RealmClass
 
 @IgnoreExtraProperties
-open class UserProfile : RealmObject() {
+@RealmClass
+open class UserProfile : RealmModel {
 
-    @PrimaryKey
-    @PropertyName("name")
-    var name: String = "Rishab"
+    @get:PropertyName("name")
+    @set:PropertyName("name")
+    public var displayName: String = "Ri"
 
-    @PropertyName("phone")
-    var phone: String = "9389863860"
-
+    @get:PropertyName("mobile_name")
+    @set:PropertyName("mobile_name")
+    var mobileNo: String = "3"
 }
