@@ -46,16 +46,16 @@ class LoginViewModel : ViewModel() {
     fun verifyOTP(otp: String) {
         verificationTokenLiveResult.getResult()?.let { token ->
 
-                loginApiManager.verifyOTP(token, otp)
-                    .doOnSubscribe { loginLiveResult.loading() }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        getUser()
-                    }, {
-                        logError(throwable = it)
-                        loginLiveResult.error(it)
-                    })
-                    .addTo(disposable)
+            loginApiManager.verifyOTP(token, otp)
+                .doOnSubscribe { loginLiveResult.loading() }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    getUser()
+                }, {
+                    logError(throwable = it)
+                    loginLiveResult.error(it)
+                })
+                .addTo(disposable)
         } ?: loginLiveResult.error(NullPointerException())
     }
 
@@ -86,7 +86,7 @@ class LoginViewModel : ViewModel() {
     private fun createUserProfile() {
         userApiManager.getCurrentUser()
             .flatMap { user ->
-                val profile = UserProfile()
+                val profile = UserProfile().apply { userId = user.id }
                 userApiManager.createUserProfile(user.id, profile)
             }
             .subscribeOnBackObserverOnMain()
