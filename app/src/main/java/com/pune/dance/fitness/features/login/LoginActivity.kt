@@ -50,6 +50,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }, {
                 //success
                 startActivity(EditProfileActivity.getIntent(this))
+                finish()
             }, {
                 //error
                 pb_login.gone()
