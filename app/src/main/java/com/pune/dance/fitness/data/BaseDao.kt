@@ -9,7 +9,9 @@ import java.io.Closeable
 open class BaseDao(open val realm: Realm = Realm.getDefaultInstance()) : Closeable {
 
     fun save(realmModel: RealmModel) {
-        realm.copyToRealmOrUpdate(realmModel)
+        realm.executeTransaction {
+            it.copyToRealmOrUpdate(realmModel)
+        }
     }
 
     fun saveAsync(realmModel: RealmModel): Completable {
