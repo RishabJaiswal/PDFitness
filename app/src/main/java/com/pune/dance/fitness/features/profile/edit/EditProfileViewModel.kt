@@ -5,6 +5,7 @@ import com.pune.dance.fitness.api.profile.FitnessApiManager
 import com.pune.dance.fitness.api.profile.models.FitnessSession
 import com.pune.dance.fitness.application.LiveResult
 import com.pune.dance.fitness.application.extensions.addTo
+import com.pune.dance.fitness.application.extensions.logError
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
@@ -26,6 +27,7 @@ class EditProfileViewModel : ViewModel() {
             .subscribe({ sessions ->
                 fitnessSessionsLiveResult.success(sessions)
             }, {
+                logError(throwable = it)
                 fitnessSessionsLiveResult.error(error = it)
             })
             .addTo(disposable)
