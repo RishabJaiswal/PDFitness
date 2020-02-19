@@ -16,5 +16,5 @@ data class FitnessSession(
 
     @get:PropertyName("timings")
     @set:PropertyName("timings")
-    var timings: List<Timing> = emptyList()
+    var timings: List<FitnessSessionTiming> = emptyList()
 )

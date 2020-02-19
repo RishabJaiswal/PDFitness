@@ -5,7 +5,7 @@ import com.google.firebase.firestore.PropertyName
 
 
 @IgnoreExtraProperties
-class Timing {
+class FitnessSessionTiming {
 
     @get:PropertyName("id")
     @set:PropertyName("id")
