@@ -49,7 +49,8 @@ class UserApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThread()) 
         }
     }
 
-    fun createUserProfile(userId: String, profile: UserProfile): Single<UserProfile> {
+    /**create or update userProfile with the given user profile*/
+    fun setUserProfile(userId: String, profile: UserProfile): Single<UserProfile> {
         return Single.create<UserProfile> { emitter ->
             firestoreDB.document("user_profiles/${userId}")
                 .set(profile)
