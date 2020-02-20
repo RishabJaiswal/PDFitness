@@ -19,7 +19,7 @@ open class UserProfile : RealmModel {
     @set:PropertyName("name")
     var displayName: String = ""
 
-    @get:PropertyName("mobile_name")
-    @set:PropertyName("mobile_name")
+    @get:PropertyName("mobile_number")
+    @set:PropertyName("mobile_number")
     var mobileNo: String = ""
 }

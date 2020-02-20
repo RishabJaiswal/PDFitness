@@ -5,6 +5,10 @@ import com.google.firebase.firestore.PropertyName
 
 data class FitnessSession(
 
+    @get:PropertyName("_id")
+    @set:PropertyName("_id")
+    var id: String = "",
+
     @get:PropertyName("display_address")
     @set:PropertyName("display_address")
     var displayAddress: String = "",
