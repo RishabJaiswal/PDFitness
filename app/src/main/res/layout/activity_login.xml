@@ -153,16 +153,37 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_otp"
         tools:visibility="gone" />
 
-    <!--OTP timer-->
+    <!--OTP timer animation-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/anim_timer"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/edt_otp"
+        app:layout_constraintTop_toBottomOf="@+id/edt_otp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="timer.json"
+        app:lottie_loop="true" />
+
+    <!--OTP timer text-->
     <TextView
         android:id="@+id/tv_otp_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/edt_otp"
-        app:layout_constraintTop_toBottomOf="@+id/edt_otp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        tools:text="OTP is valid for 11:11" />
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/anim_timer"
+        app:layout_constraintStart_toEndOf="@+id/anim_timer"
+        app:layout_constraintTop_toTopOf="@+id/anim_timer"
+        tools:text="11:11" />
+
+    <!--timer group-->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:constraint_referenced_ids="tv_otp_timer,anim_timer" />
 
 
     <!--terms and consitions-->

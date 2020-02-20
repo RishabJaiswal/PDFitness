@@ -83,6 +83,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         btn_login.visibleOrGone(isVisible)
         toggleResendOtpButton(isVisible)
         edt_otp.visibleOrGone(isVisible)
+        group_timer.visibleOrGone(isVisible)
     }
 
     /**hide/show views to showcase LCE for views
@@ -132,16 +133,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     private fun getRemainingTime(millisLeft: Long): String? {
         if (millisLeft > 0) {
             val seconds = millisLeft / 1000
-            return getString(
-                R.string.otp_timer_msg,
-                "${String.format("%02d", seconds.div(60))} : ${String.format("%02d", seconds.rem(60))}"
-            )
+            return "${String.format("%02d", seconds.div(60))} : ${String.format("%02d", seconds.rem(60))}"
         }
         return null
     }
 
     private fun removeTimer() {
-        tv_otp_timer.gone()
+        group_timer.gone()
         btn_resend_otp.visible()
     }
 
