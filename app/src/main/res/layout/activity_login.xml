@@ -149,9 +149,20 @@
         android:text="@string/resend_otp"
         android:textColor="@color/textSecondary"
         android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_otp" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_otp"
+        tools:visibility="gone" />
+
+    <!--OTP timer-->
+    <TextView
+        android:id="@+id/tv_otp_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/edt_otp"
+        app:layout_constraintTop_toBottomOf="@+id/edt_otp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        tools:text="OTP is valid for 11:11" />
 
 
     <!--terms and consitions-->

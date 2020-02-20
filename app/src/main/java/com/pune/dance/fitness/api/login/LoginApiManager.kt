@@ -18,13 +18,14 @@ class LoginApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThread())
     private val phoneAuthProvider = PhoneAuthProvider.getInstance()
 
     //verify phoneNumber
-    fun verifyPhoneNumber(mobileNo: String): Single<VerificationToken> {
+    fun verifyPhoneNumber(mobileNo: String, time: Long, timeUnit: TimeUnit): Single<VerificationToken> {
         return Single.create<VerificationToken> { emitter ->
 
             //verification
             val verificationToken = VerificationToken()
 
-            phoneAuthProvider.verifyPhoneNumber(mobileNo, 60, TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD,
+            phoneAuthProvider.verifyPhoneNumber(
+                mobileNo, time, timeUnit, TaskExecutors.MAIN_THREAD,
                 object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
                         verificationToken.authCredential = phoneAuthCredential

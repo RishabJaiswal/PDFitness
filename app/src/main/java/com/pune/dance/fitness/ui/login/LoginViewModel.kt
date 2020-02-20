@@ -1,5 +1,7 @@
 package com.pune.dance.fitness.ui.login
 
+import android.os.CountDownTimer
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pune.dance.fitness.api.login.LoginApiManager
 import com.pune.dance.fitness.api.login.models.VerificationToken
@@ -13,30 +15,33 @@ import com.pune.dance.fitness.application.extensions.subscribeOnBackObserverOnMa
 import com.pune.dance.fitness.data.UserDao
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.TimeUnit
 
 class LoginViewModel : ViewModel() {
 
-    private var mobileNo: String = ""
-    private val userDao = UserDao()
+    private val loginApiManager by lazy { LoginApiManager() }
+    private val userApiManager by lazy { UserApiManager() }
+    private val disposable = CompositeDisposable()
+
     val verificationTokenLiveResult = LiveResult<VerificationToken>()
+    val otpTimerMillisLeft: MutableLiveData<Long> by lazy { MutableLiveData<Long>() }
     val loginLiveResult = LiveResult<Boolean>()
 
-    private val loginApiManager by lazy {
-        LoginApiManager()
-    }
-    private val userApiManager by lazy {
-        UserApiManager()
-    }
-    private val disposable = CompositeDisposable()
+    private var mobileNo: String = ""
+    private val userDao = UserDao()
+    private var timer: CountDownTimer? = null
+    private val OTP_TIMER_MILLIS = 60000L
+    private val OTP_TIMER_INTERVAL = 1000L
 
     //verifying number
     fun verifyMobileNumber(mobileNo: String) {
-        loginApiManager.verifyPhoneNumber(mobileNo)
+        loginApiManager.verifyPhoneNumber(mobileNo, OTP_TIMER_MILLIS, TimeUnit.MILLISECONDS)
             .doOnSubscribe { verificationTokenLiveResult.loading() }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
                 this.mobileNo = mobileNo
                 verificationTokenLiveResult.success(token)
+                startTimer()
             }, {
                 logError(throwable = it)
                 verificationTokenLiveResult.error(it)
@@ -108,9 +113,31 @@ class LoginViewModel : ViewModel() {
             .addTo(disposable)
     }
 
+    /**timer represents the time until the incoming OTP is valid*/
+    fun startTimer() {
+        timer = object : CountDownTimer(OTP_TIMER_MILLIS, OTP_TIMER_INTERVAL) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                otpTimerMillisLeft.value = millisUntilFinished
+            }
+
+            override fun onFinish() {
+                otpTimerMillisLeft.value = 0
+            }
+        }
+        timer?.start()
+    }
+
+    fun stopTimer() {
+        timer?.cancel()
+    }
+
+    fun getOtpTimeLeft() = otpTimerMillisLeft.value ?: -1
+
     override fun onCleared() {
         disposable.dispose()
         userDao.close()
+        stopTimer()
         super.onCleared()
     }
 }

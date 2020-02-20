@@ -23,7 +23,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         btn_login.setOnClickListener(this)
         btn_get_otp.setOnClickListener(this)
 
-        //observing verification of mobile no
+        /**observing verification of mobile no*/
         viewModel.verificationTokenLiveResult.observe(this, Observer {
             it.parseResult({
                 //loading
@@ -40,7 +40,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             })
         })
 
-        //observing verification of otp
+        /**observing verification of otp*/
         viewModel.loginLiveResult.observe(this, Observer {
             it.parseResult({
                 //loading
@@ -55,12 +55,25 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 //error
                 pb_login.gone()
                 btn_login.visible()
-                btn_resend_otp.visible()
+                toggleResendOtpButton(isVisible = true)
                 toast(R.string.error_invalid_otp)
             })
         })
+
+        /**OTP timer*/
+        viewModel.otpTimerMillisLeft.observe(this, Observer<Long> { millisLeft ->
+            if (millisLeft == null || millisLeft <= 0) {
+                removeTimer()
+            } else {
+                tv_otp_timer.text = getRemainingTime(millisLeft)
+            }
+        })
     }
 
+    override fun onDestroy() {
+        viewModel.stopTimer()
+        super.onDestroy()
+    }
 
     /**hide/show views to showcase LCE for views
      * related to verifying OTP
@@ -68,7 +81,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     private fun toggleLoginViews(isVisible: Boolean) {
         pb_get_otp.visibleOrGone(!isVisible)
         btn_login.visibleOrGone(isVisible)
-        btn_resend_otp.visibleOrGone(isVisible)
+        toggleResendOtpButton(isVisible)
         edt_otp.visibleOrGone(isVisible)
     }
 
@@ -77,6 +90,15 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     private fun toggleGetOtpViews(isVisible: Boolean) {
         pb_get_otp.visibleOrGone(!isVisible)
         btn_get_otp.visibleOrGone(isVisible)
+    }
+
+    /**otp edit text needs to be aware of the timer*/
+    private fun toggleResendOtpButton(isVisible: Boolean) {
+        if (viewModel.getOtpTimeLeft() <= 0) {
+            edt_otp.gone()
+        } else {
+            edt_otp.visibleOrGone(isVisible)
+        }
     }
 
 
@@ -104,6 +126,23 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         if (otp.isNotEmpty()) {
             viewModel.verifyOTP(otp)
         }
+    }
+
+    //getting time left for OTP expiration
+    private fun getRemainingTime(millisLeft: Long): String? {
+        if (millisLeft > 0) {
+            val seconds = millisLeft / 1000
+            return getString(
+                R.string.otp_timer_msg,
+                "${String.format("%02d", seconds.div(60))} : ${String.format("%02d", seconds.rem(60))}"
+            )
+        }
+        return null
+    }
+
+    private fun removeTimer() {
+        tv_otp_timer.gone()
+        btn_resend_otp.visible()
     }
 
     override fun onClick(view: View?) {
