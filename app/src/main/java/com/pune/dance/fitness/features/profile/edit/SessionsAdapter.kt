@@ -28,20 +28,22 @@ class SessionsAdapter : ListAdapter<FitnessSession, SessionsAdapter.SessionViewH
 
     class SessionViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
-        private lateinit var fitenssSession: FitnessSession
+        private lateinit var fitnessSession: FitnessSession
+        private val timingsAdapter = FitnessSessionTimingsAdapter()
 
         fun bind(fitnessSession: FitnessSession) {
-            this.fitenssSession = fitnessSession
+            this.fitnessSession = fitnessSession
             itemView.apply {
                 tv_place.text = fitnessSession.displayAddress
                 btn_directions.setOnClickListener(this@SessionViewHolder)
-                //rv_time_price.adapter =
+                rv_time_price.adapter = timingsAdapter
+                timingsAdapter.submitList(fitnessSession.timings)
             }
         }
 
         override fun onClick(view: View?) {
             //launching google maps with location
-            val sessionLocation = fitenssSession.location
+            val sessionLocation = fitnessSession.location
             val gmmIntentUri = Uri.parse(
                 "google.streetview:cbll=" +
                         "${sessionLocation?.latitude}," +
