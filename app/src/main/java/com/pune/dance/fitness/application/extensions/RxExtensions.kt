@@ -31,6 +31,11 @@ fun Completable.subscribeOnBackObserverOnMain(): Completable {
         .observeOn(AndroidSchedulers.mainThread())
 }
 
+fun <T> Single<T>.subscribeObserverOnMain(): Single<T> {
+    return this.subscribeOn(AndroidSchedulers.mainThread())
+        .observeOn(AndroidSchedulers.mainThread())
+}
+
 //Rx streams to LiveData
 fun <T> Single<T>.toLiveData(): LiveData<T> {
     return LiveDataReactiveStreams.fromPublisher(this.toFlowable())
