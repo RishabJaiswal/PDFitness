@@ -1,4 +1,4 @@
-package com.pune.dance.fitness.features.login
+package com.pune.dance.fitness.ui.login
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,7 @@ import com.pune.dance.fitness.BuildConfig
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.BaseActivity
 import com.pune.dance.fitness.application.extensions.*
-import com.pune.dance.fitness.features.profile.edit.EditProfileActivity
+import com.pune.dance.fitness.ui.profile.edit.EditProfileActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), View.OnClickListener {

@@ -1,4 +1,4 @@
-package com.pune.dance.fitness.features.login
+package com.pune.dance.fitness.ui.login
 
 import androidx.lifecycle.ViewModel
 import com.pune.dance.fitness.api.login.LoginApiManager

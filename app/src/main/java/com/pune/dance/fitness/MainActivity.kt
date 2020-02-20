@@ -3,7 +3,7 @@ package com.pune.dance.fitness
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.pune.dance.fitness.features.login.LoginActivity
+import com.pune.dance.fitness.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 

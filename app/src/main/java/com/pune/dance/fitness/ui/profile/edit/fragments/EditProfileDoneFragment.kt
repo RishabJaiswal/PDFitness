@@ -1,10 +1,11 @@
-package com.pune.dance.fitness.features.profile.edit
+package com.pune.dance.fitness.ui.profile.edit.fragments
 
 import android.os.Bundle
 import android.view.View
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.BaseFragment
 import com.pune.dance.fitness.application.extensions.configureViewModel
+import com.pune.dance.fitness.ui.profile.edit.EditProfileViewModel
 import kotlinx.android.synthetic.main.frag_edit_profile_done.*
 
 class EditProfileDoneFragment : BaseFragment(), View.OnClickListener {

@@ -1,4 +1,4 @@
-package com.pune.dance.fitness.features.profile.edit
+package com.pune.dance.fitness.ui.profile.edit.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +15,9 @@ class FitnessSessionTimingsAdapter(
     val fitnessSessionId: String,
     val onTimeSelected: (sessionId: String, timingId: String) -> Unit
 ) :
-    ListAdapter<FitnessSessionTiming, FitnessSessionTimingsAdapter.TimingViewHolder>(TimingDiffcallback()) {
+    ListAdapter<FitnessSessionTiming, FitnessSessionTimingsAdapter.TimingViewHolder>(
+        TimingDiffcallback()
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimingViewHolder {
         return TimingViewHolder(

@@ -1,4 +1,4 @@
-package com.pune.dance.fitness.features.profile.edit
+package com.pune.dance.fitness.ui.profile.edit
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

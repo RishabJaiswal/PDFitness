@@ -1,4 +1,4 @@
-package com.pune.dance.fitness.features.profile.edit
+package com.pune.dance.fitness.ui.profile.edit.adapters
 
 import android.content.Intent
 import android.net.Uri
@@ -13,7 +13,9 @@ import com.pune.dance.fitness.api.profile.models.FitnessSession
 import kotlinx.android.synthetic.main.item_select_time_place.view.*
 
 class SessionsAdapter(val onTimeSelected: (sessionId: String, timingId: String) -> Unit) :
-    ListAdapter<FitnessSession, SessionsAdapter.SessionViewHolder>(SessionDiffcallback()) {
+    ListAdapter<FitnessSession, SessionsAdapter.SessionViewHolder>(
+        SessionDiffcallback()
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionViewHolder {
         return SessionViewHolder(
@@ -30,7 +32,12 @@ class SessionsAdapter(val onTimeSelected: (sessionId: String, timingId: String) 
     inner class SessionViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
         private lateinit var fitnessSession: FitnessSession
-        private val timingsAdapter by lazy { FitnessSessionTimingsAdapter(fitnessSession.id, onTimeSelected) }
+        private val timingsAdapter by lazy {
+            FitnessSessionTimingsAdapter(
+                fitnessSession.id,
+                onTimeSelected
+            )
+        }
 
         fun bind(fitnessSession: FitnessSession) {
             this.fitnessSession = fitnessSession
