@@ -16,6 +16,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 class LoginViewModel : ViewModel() {
 
+    private var mobileNo: String = ""
     private val userDao = UserDao()
     val verificationTokenLiveResult = LiveResult<VerificationToken>()
     val loginLiveResult = LiveResult<Boolean>()
@@ -34,6 +35,7 @@ class LoginViewModel : ViewModel() {
             .doOnSubscribe { verificationTokenLiveResult.loading() }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
+                this.mobileNo = mobileNo
                 verificationTokenLiveResult.success(token)
             }, {
                 logError(throwable = it)
@@ -86,7 +88,11 @@ class LoginViewModel : ViewModel() {
     private fun createUserProfile() {
         userApiManager.getCurrentUser()
             .flatMap { user ->
-                val profile = UserProfile().apply { userId = user.id }
+                //creating fresh/new user profile
+                val profile = UserProfile().apply {
+                    userId = user.id
+                    this.mobileNo = this@LoginViewModel.mobileNo
+                }
                 userApiManager.createUserProfile(user.id, profile)
             }
             .subscribeOnBackObserverOnMain()
