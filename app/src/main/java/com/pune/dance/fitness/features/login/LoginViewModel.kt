@@ -93,7 +93,7 @@ class LoginViewModel : ViewModel() {
                     userId = user.id
                     this.mobileNo = this@LoginViewModel.mobileNo
                 }
-                userApiManager.createUserProfile(user.id, profile)
+                userApiManager.setUserProfile(user.id, profile)
             }
             .subscribeOnBackObserverOnMain()
             .flatMapResumeAfter {

@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.frag_edit_time_place.*
 class EditTImePlaceFragment : BaseFragment() {
 
     private lateinit var viewModel: EditProfileViewModel
-    private val sessionsAdapter by lazy { SessionsAdapter() }
+    private val sessionsAdapter by lazy { SessionsAdapter(this::onSessionTimingSelected) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +19,7 @@ class EditTImePlaceFragment : BaseFragment() {
         activity?.let { _activity ->
             viewModel = _activity.configureViewModel()
             viewModel.getFitnessSessions()
-            observeSessionsList()
+            observeLiveContent()
         }
     }
 
@@ -30,11 +30,11 @@ class EditTImePlaceFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv_time_place_slides.adapter = sessionsAdapter
-
     }
 
-    /**displays list / LCE for fitness sessions' place and timings*/
-    private fun observeSessionsList() {
+    private fun observeLiveContent() {
+
+        /**observing list / LCE for fitness sessions' place and timings*/
         viewModel.fitnessSessionsLiveResult.observe(this, Observer {
             it.parseResult({
                 //todo:: add progress
@@ -44,5 +44,10 @@ class EditTImePlaceFragment : BaseFragment() {
                 //todo:: add error
             })
         })
+    }
+
+    /**updates user profile's fields for session and timing ID*/
+    private fun onSessionTimingSelected(sessionId: String, timingId: String) {
+        viewModel.updateUserFitnessSession(sessionId, timingId)
     }
 }

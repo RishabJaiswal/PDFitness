@@ -11,7 +11,10 @@ import com.pune.dance.fitness.api.profile.models.FitnessSessionTiming
 import com.pune.dance.fitness.application.extensions.toString
 import kotlinx.android.synthetic.main.item_select_time.view.*
 
-class FitnessSessionTimingsAdapter :
+class FitnessSessionTimingsAdapter(
+    val fitnessSessionId: String,
+    val onTimeSelected: (sessionId: String, timingId: String) -> Unit
+) :
     ListAdapter<FitnessSessionTiming, FitnessSessionTimingsAdapter.TimingViewHolder>(TimingDiffcallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimingViewHolder {
@@ -26,9 +29,13 @@ class FitnessSessionTimingsAdapter :
         holder.bind(getItem(position))
     }
 
-    class TimingViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    inner class TimingViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
         private lateinit var timing: FitnessSessionTiming
+
+        init {
+            itemView.btn_time.setOnClickListener(this)
+        }
 
         fun bind(timing: FitnessSessionTiming) {
             this.timing = timing
@@ -39,6 +46,7 @@ class FitnessSessionTimingsAdapter :
         }
 
         override fun onClick(view: View?) {
+            onTimeSelected(fitnessSessionId, timing.id)
         }
     }
 
