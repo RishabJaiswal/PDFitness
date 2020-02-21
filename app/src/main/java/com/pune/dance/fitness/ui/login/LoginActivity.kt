@@ -46,7 +46,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 //loading
                 pb_login.visible()
                 btn_login.invisible()
-                btn_resend_otp.gone()
             }, {
                 //success
                 startActivity(EditProfileActivity.getIntent(this))
@@ -54,8 +53,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }, {
                 //error
                 pb_login.gone()
-                btn_login.visible()
-                toggleResendOtpButton(isVisible = true)
+                if (viewModel.getOtpTimeLeft() == 0L) {
+                    toggleLoginViews(isVisible = false)
+                    toggleGetOtpViews(isVisible = true)
+                } else {
+                    btn_login.visible()
+                }
                 toast(R.string.error_invalid_otp)
             })
         })
@@ -63,7 +66,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         /**OTP timer*/
         viewModel.otpTimerMillisLeft.observe(this, Observer<Long> { millisLeft ->
             if (millisLeft == null || millisLeft <= 0) {
-                removeTimer()
+                onOtpTimerEnd()
             } else {
                 tv_otp_timer.text = getRemainingTime(millisLeft)
             }
@@ -81,7 +84,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     private fun toggleLoginViews(isVisible: Boolean) {
         pb_get_otp.visibleOrGone(!isVisible)
         btn_login.visibleOrGone(isVisible)
-        toggleResendOtpButton(isVisible)
         edt_otp.visibleOrGone(isVisible)
         group_timer.visibleOrGone(isVisible)
     }
@@ -92,16 +94,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         pb_get_otp.visibleOrGone(!isVisible)
         btn_get_otp.visibleOrGone(isVisible)
     }
-
-    /**otp edit text needs to be aware of the timer*/
-    private fun toggleResendOtpButton(isVisible: Boolean) {
-        if (viewModel.getOtpTimeLeft() <= 0) {
-            edt_otp.gone()
-        } else {
-            edt_otp.visibleOrGone(isVisible)
-        }
-    }
-
 
     private fun verifyPhoneNumber() {
         var mobileNo = edt_mobile_no.text.toString()
@@ -138,9 +130,14 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         return null
     }
 
-    private fun removeTimer() {
+    private fun onOtpTimerEnd() {
         group_timer.gone()
-        btn_resend_otp.visible()
+
+        //check is user is currently logging in or not
+        if (viewModel.loginLiveResult.isLoading().not()) {
+            toggleLoginViews(isVisible = false)
+            toggleGetOtpViews(isVisible = true)
+        }
     }
 
     override fun onClick(view: View?) {

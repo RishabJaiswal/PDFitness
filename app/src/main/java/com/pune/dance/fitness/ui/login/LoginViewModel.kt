@@ -27,19 +27,26 @@ class LoginViewModel : ViewModel() {
     val otpTimerMillisLeft: MutableLiveData<Long> by lazy { MutableLiveData<Long>() }
     val loginLiveResult = LiveResult<Boolean>()
 
-    private var mobileNo: String = ""
+    private var verifiedMobileNo: String = ""
     private val userDao = UserDao()
     private var timer: CountDownTimer? = null
-    private val OTP_TIMER_MILLIS = 60000L
+    private val OTP_TIMER_MILLIS = 10000L
     private val OTP_TIMER_INTERVAL = 1000L
 
     //verifying number
     fun verifyMobileNumber(mobileNo: String) {
-        loginApiManager.verifyPhoneNumber(mobileNo, OTP_TIMER_MILLIS, TimeUnit.MILLISECONDS)
+        /**this is a VerificationToken which has a ForceResendingToken*/
+        var resendVerificationToken: VerificationToken? = null
+        if (mobileNo == verifiedMobileNo) {
+            resendVerificationToken = verificationTokenLiveResult.getResult()
+        }
+
+        //verifying number and requesting | resending an OTP
+        loginApiManager.verifyPhoneNumber(mobileNo, OTP_TIMER_MILLIS, TimeUnit.MILLISECONDS, resendVerificationToken)
             .doOnSubscribe { verificationTokenLiveResult.loading() }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
-                this.mobileNo = mobileNo
+                this.verifiedMobileNo = mobileNo
                 verificationTokenLiveResult.success(token)
                 startTimer()
             }, {
@@ -96,7 +103,7 @@ class LoginViewModel : ViewModel() {
                 //creating fresh/new user profile
                 val profile = UserProfile().apply {
                     userId = user.id
-                    this.mobileNo = this@LoginViewModel.mobileNo
+                    this.mobileNo = this@LoginViewModel.verifiedMobileNo
                 }
                 userApiManager.setUserProfile(user.id, profile)
             }
@@ -114,7 +121,7 @@ class LoginViewModel : ViewModel() {
     }
 
     /**timer represents the time until the incoming OTP is valid*/
-    fun startTimer() {
+    private fun startTimer() {
         timer = object : CountDownTimer(OTP_TIMER_MILLIS, OTP_TIMER_INTERVAL) {
 
             override fun onTick(millisUntilFinished: Long) {

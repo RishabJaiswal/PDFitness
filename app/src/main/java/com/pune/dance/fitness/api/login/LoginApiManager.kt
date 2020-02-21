@@ -17,12 +17,20 @@ class LoginApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThread())
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val phoneAuthProvider = PhoneAuthProvider.getInstance()
 
-    //verify phoneNumber
-    fun verifyPhoneNumber(mobileNo: String, time: Long, timeUnit: TimeUnit): Single<VerificationToken> {
+    /**This method verifies a number to send code and resend an OTP as well*/
+    fun verifyPhoneNumber(
+        mobileNo: String,
+        time: Long,
+        timeUnit: TimeUnit,
+        resendVerificationToken: VerificationToken? = null
+    ): Single<VerificationToken> {
         return Single.create<VerificationToken> { emitter ->
 
-            //verification
-            val verificationToken = VerificationToken()
+            //verification token
+            var verificationToken = resendVerificationToken
+            if (verificationToken == null) {
+                verificationToken = VerificationToken()
+            }
 
             phoneAuthProvider.verifyPhoneNumber(
                 mobileNo, time, timeUnit, TaskExecutors.MAIN_THREAD,
