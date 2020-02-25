@@ -32,6 +32,7 @@
         tools:text="3 weeks" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_get_directions"
         style="@style/filledElevatedButton"
         android:backgroundTint="@color/pumpkinOrange"
         android:text="@string/get_directions"
