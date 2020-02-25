@@ -28,6 +28,11 @@ class EditProfileDoneFragment : BaseFragment(), View.OnClickListener {
         btn_take_home.setOnClickListener(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        anim_confetti.playAnimation()
+    }
+
     override fun onClick(v: View?) {
         /**taking user home after updating profile*/
         viewModel.updateProfile()

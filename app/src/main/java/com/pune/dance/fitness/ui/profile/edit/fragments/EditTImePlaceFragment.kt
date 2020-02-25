@@ -6,6 +6,8 @@ import androidx.lifecycle.Observer
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.BaseFragment
 import com.pune.dance.fitness.application.extensions.configureViewModel
+import com.pune.dance.fitness.application.extensions.gone
+import com.pune.dance.fitness.application.extensions.visible
 import com.pune.dance.fitness.ui.profile.edit.EditProfileViewModel
 import com.pune.dance.fitness.ui.profile.edit.adapters.SessionsAdapter
 import kotlinx.android.synthetic.main.frag_edit_time_place.*
@@ -39,11 +41,12 @@ class EditTImePlaceFragment : BaseFragment() {
         /**observing list / LCE for fitness sessions' place and timings*/
         viewModel.fitnessSessionsLiveResult.observe(this, Observer {
             it.parseResult({
-                //todo:: add progress
+                pb_time_place.visible()
             }, { sessionsList ->
+                pb_time_place.gone()
                 sessionsAdapter.submitList(sessionsList)
             }, {
-                //todo:: add error
+                pb_time_place.gone()
             })
         })
     }

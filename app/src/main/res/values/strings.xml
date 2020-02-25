@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PDFitness</string>
+    <string name="rupees">\u20B9 %d</string>
 </resources>

@@ -43,7 +43,7 @@ class FitnessSessionTimingsAdapter(
             this.timing = timing
             itemView.apply {
                 btn_time.text = timing.time.toString("hh:mm aa")
-                tv_price.text = timing.price.toString()
+                tv_price.text = tv_price.context.getString(R.string.rupees, timing.price)
             }
         }
 
