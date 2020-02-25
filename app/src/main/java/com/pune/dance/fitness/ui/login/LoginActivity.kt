@@ -79,13 +79,21 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     /**hide/show views to showcase LCE for views
-     * related to verifying OTP
-     * and logging user in*/
+     * related to verifying OTP and logging user in*
+     * @param{isVisible} tells if user will be able to
+     * enter the OTP*/
     private fun toggleLoginViews(isVisible: Boolean) {
         pb_get_otp.visibleOrGone(!isVisible)
         btn_login.visibleOrGone(isVisible)
         edt_otp.visibleOrGone(isVisible)
         group_timer.visibleOrGone(isVisible)
+        edt_mobile_no.isEnabled = !isVisible
+
+        //clearing previously enter OTPs
+        if (isVisible) {
+            edt_otp.setText("")
+        }
+        hideKeyboard(edt_otp)
     }
 
     /**hide/show views to showcase LCE for views
@@ -146,11 +154,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             //get otp
             R.id.btn_get_otp -> {
                 verifyPhoneNumber()
+                hideKeyboard(view)
             }
 
             //login
             R.id.btn_login -> {
                 verifyOTP()
+                hideKeyboard(view)
             }
         }
     }
