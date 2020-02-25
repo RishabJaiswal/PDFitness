@@ -47,6 +47,8 @@ class EditProfileViewModel : ViewModel() {
     //setting and getting name
     fun getName() = userProfile?.displayName ?: ""
 
+    fun getMobileNumber() = userProfile?.mobileNo ?: ""
+
     fun updateName(name: String) {
         userProfile?.displayName = name
     }
