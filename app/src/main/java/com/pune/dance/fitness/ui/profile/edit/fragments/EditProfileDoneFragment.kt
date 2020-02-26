@@ -2,9 +2,12 @@ package com.pune.dance.fitness.ui.profile.edit.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.BaseFragment
 import com.pune.dance.fitness.application.extensions.configureViewModel
+import com.pune.dance.fitness.application.extensions.invisible
+import com.pune.dance.fitness.application.extensions.visible
 import com.pune.dance.fitness.ui.profile.edit.EditProfileViewModel
 import com.pune.dance.fitness.ui.profile.view.ViewProfileActivity
 import kotlinx.android.synthetic.main.frag_edit_profile_done.*
@@ -34,10 +37,26 @@ class EditProfileDoneFragment : BaseFragment(), View.OnClickListener {
         anim_confetti.playAnimation()
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        /**observing updation of profile*/
+        viewModel.profileUpdateLiveResult.observe(this, Observer {
+            it.parseResult({
+                btn_take_home.invisible()
+                group_progress_update_profile.visible()
+            }, {
+                activity?.let { _activity ->
+                    startActivity(ViewProfileActivity.getIntent(_activity))
+                    _activity.finish()
+                }
+            }, {
+                toast(R.string.error_unknown)
+            })
+        })
+    }
+
     override fun onClick(v: View?) {
         viewModel.updateProfile()
-        context?.let {
-            startActivity(ViewProfileActivity.getIntent(it))
-        }
     }
 }

@@ -22,17 +22,6 @@ class EditProfileActivity : BaseActivity() {
         setContentView(R.layout.activity_edit_profile)
         setEditProfileSlides()
 
-        /**observing updation of profile*/
-        viewModel.profileUpdateLiveResult.observe(this, Observer {
-            it.parseResult({
-                //todo:: add progress
-            }, {
-                //todo: start home screen
-            }, {
-                toast(R.string.error_unknown)
-            })
-        })
-
         /**observing change in slider page*/
         viewModel.changePageLiveData.observe(this, Observer { pageIndex ->
             vp_edit_profile.setCurrentItem(pageIndex, true)
