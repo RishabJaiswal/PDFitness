@@ -64,7 +64,7 @@
         android:id="@+id/tv_profile_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/msg_peofile_update"
+        android:text="@string/msg_profile_update"
         android:textColor="@color/grapePurple"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/pb_profile_update"

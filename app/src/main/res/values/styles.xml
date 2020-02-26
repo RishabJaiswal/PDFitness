@@ -86,4 +86,12 @@
         <item name="android:layout_marginTop">16dp</item>
     </style>
 
+    <style name="homeLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/txt_title</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+    </style>
+
 </resources>
