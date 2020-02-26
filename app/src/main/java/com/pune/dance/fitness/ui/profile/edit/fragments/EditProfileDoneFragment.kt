@@ -6,6 +6,7 @@ import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.BaseFragment
 import com.pune.dance.fitness.application.extensions.configureViewModel
 import com.pune.dance.fitness.ui.profile.edit.EditProfileViewModel
+import com.pune.dance.fitness.ui.profile.view.ViewProfileActivity
 import kotlinx.android.synthetic.main.frag_edit_profile_done.*
 
 class EditProfileDoneFragment : BaseFragment(), View.OnClickListener {
@@ -34,7 +35,9 @@ class EditProfileDoneFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        /**taking user home after updating profile*/
         viewModel.updateProfile()
+        context?.let {
+            startActivity(ViewProfileActivity.getIntent(it))
+        }
     }
 }

@@ -24,4 +24,6 @@
     <color name="grapePurple">#5b1e5d</color>
     <color name="berry">#9e1660</color>
     <color name="pumpkinOrange">#f48617</color>
+
+    <color name="profile_item_tint">#FFC330</color>
 </resources>

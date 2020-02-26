@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/txt_body"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_profile_value"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_profile_value"
         tools:text="Diet plan" />
 
 
@@ -33,11 +33,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_get_directions"
-        style="@style/filledElevatedButton"
+        style="@style/filledUnelevatedButton"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="1dp"
         android:backgroundTint="@color/pumpkinOrange"
         android:text="@string/get_directions"
-        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_profile_value"
-        app:layout_constraintTop_toBottomOf="@+id/tv_profile_value" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_value"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

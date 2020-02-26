@@ -1,5 +1,7 @@
 package com.pune.dance.fitness.ui.profile.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.pune.dance.fitness.R
@@ -8,6 +10,8 @@ import com.pune.dance.fitness.ui.profile.edit.EditProfileViewModel
 import kotlinx.android.synthetic.main.activity_view_profile.*
 
 class ViewProfileActivity : AppCompatActivity() {
+
+    private val profileItemsAdapter by lazy { ViewProfileAdapter() }
 
     private val viewModel by lazy {
         configureViewModel<EditProfileViewModel>()
@@ -22,5 +26,13 @@ class ViewProfileActivity : AppCompatActivity() {
     private fun setupUserProfile() {
         tv_profile_name.text = viewModel.getName()
         tv_phone_number.text = viewModel.getMobileNumber()
+        rv_profile.adapter = profileItemsAdapter
+        profileItemsAdapter.submitList(viewModel.getProfileItems())
+    }
+
+    companion object {
+        fun getIntent(context: Context): Intent {
+            return Intent(context, ViewProfileActivity::class.java)
+        }
     }
 }

@@ -9,6 +9,7 @@ import com.pune.dance.fitness.api.user.models.UserProfile
 import com.pune.dance.fitness.application.LiveResult
 import com.pune.dance.fitness.application.extensions.*
 import com.pune.dance.fitness.data.UserDao
+import com.pune.dance.fitness.ui.profile.view.ProfileItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
@@ -78,6 +79,18 @@ class EditProfileViewModel : ViewModel() {
         changePageLiveData.value?.let { pageIndex ->
             changePageLiveData.value = pageIndex + 1
         }
+    }
+
+    fun getProfileItems(): List<ProfileItem> {
+        return arrayListOf(
+            ProfileItem("Participation ratio", "95%"),
+            ProfileItem("Diet plan", "3 week"),
+            ProfileItem("Fees due", "400 /-"),
+            ProfileItem("Timing", "7: 30pm"),
+            ProfileItem.VenueItem("1.22", "2.22").apply {
+                key = "Venue"
+                value = "Place name"
+            })
     }
 
     override fun onCleared() {

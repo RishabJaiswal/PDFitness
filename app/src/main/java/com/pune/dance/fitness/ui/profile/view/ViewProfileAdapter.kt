@@ -17,6 +17,7 @@ class ViewProfileAdapter : ListAdapter<ProfileItem, ViewProfileAdapter.ProfileVi
         return when (getItem(position)) {
             is ProfileItem.VenueItem -> R.layout.item_view_profile_venue
             is ProfileItem -> R.layout.item_view_profile
+            else -> throw IllegalArgumentException()
         }
     }
 
@@ -41,6 +42,11 @@ class ViewProfileAdapter : ListAdapter<ProfileItem, ViewProfileAdapter.ProfileVi
             itemView.apply {
                 tv_profile_key.text = profileItem.key
                 tv_profile_value.text = profileItem.value
+
+                //setting background tint
+                if (adapterPosition % 2 != 0) {
+                    itemView.setBackgroundResource(R.color.profile_item_tint)
+                }
             }
         }
     }

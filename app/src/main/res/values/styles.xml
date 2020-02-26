@@ -17,6 +17,7 @@
         <item name="cornerRadius">@dimen/base_corner_radius</item>
         <item name="fontFamily">@font/montserrat_semibold</item>
         <item name="android:textSize">@dimen/txt_body</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
         <item name="android:insetTop">0dp</item>
@@ -37,6 +38,20 @@
 
     <style name="filledElevatedButton" parent="BaseButton">
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="filledUnelevatedButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="cornerRadius">@dimen/base_corner_radius</item>
+        <item name="fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textSize">@dimen/txt_body</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="backgroundTint">@color/colorAccent</item>
     </style>
 
     <!--base edit text box-->
