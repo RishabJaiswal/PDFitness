@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">PDFitness</string>
     <string name="rupees">\u20B9 %d</string>
-    <string name="msg_peofile_update">Updating your profile</string>
+    <string name="msg_profile_update">Updating your profile</string>
 </resources>

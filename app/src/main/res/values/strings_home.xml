@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="attendance">Attendance</string>
+
+    <!--marking attendance-->
+    <string name="attendance_ask_presence">Will you be attending today?</string>
+    <string name="attendance_ask_presence_msg">You have been regular and extremely passionate. Don\'t miss the class!</string>
+    <string name="attendance_ask_action_primary">Yes, Let\'s do it</string>
+    <string name="attendance_ask_action_secondary">No</string>
+
+    <!--payments-->
+    <string name="lbl_payments">Payments</string>
+
+    <!--diet plan-->
+    <string name="lbl_diet_plan">Diet Plan</string>
+    <string name="msg_blankslate_diet_plan">No diet plan yet</string>
+    <string name="opt_diet_plan">Opt for a diet plan</string>
+
+</resources>
