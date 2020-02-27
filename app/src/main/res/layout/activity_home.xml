@@ -217,6 +217,7 @@
 
         <!--select diet plan-->
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_select_diet_plan"
             style="@style/filledUnelevatedButton"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/squash"
@@ -225,6 +226,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline_diet_plan"
             app:layout_constraintTop_toBottomOf="@+id/tv_blankslate_diet" />
+
+        <!--diet plan blankslate-->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/blankslate_diet_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv_blankslate_diet, btn_select_diet_plan" />
+
+        <!--diet plan-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_diet_plan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="150dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lbl_diet_plan"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_home_diet_plan" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
