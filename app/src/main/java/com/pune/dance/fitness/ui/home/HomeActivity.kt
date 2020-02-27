@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.extensions.configureViewModel
 import com.pune.dance.fitness.ui.home.adapters.AttendanceCalendarAdapter
@@ -40,8 +41,22 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupDietPlan() {
+        viewModel.getDietPlan()
         rv_diet_plan.adapter = dietPlanAdapter
-        dietPlanAdapter.update(viewModel.getDietPlan())
+
+        //observing user's diet plan
+        viewModel.dietPlanLiveResult.observe(this, Observer {
+            it.parseResult({
+                //loading
+                //todo:: show diet progress
+            }, { dietPlanItems ->
+                //success
+                dietPlanAdapter.update(dietPlanItems)
+            }, {
+                //error
+                //todo:: show diet error
+            })
+        })
     }
 
     companion object {
