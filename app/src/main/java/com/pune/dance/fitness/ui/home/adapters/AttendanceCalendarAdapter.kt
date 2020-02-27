@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pune.dance.fitness.R
-import com.pune.dance.fitness.ui.home.CalendarItem
+import com.pune.dance.fitness.ui.home.models.CalendarItem
 import kotlinx.android.synthetic.main.item_home_attendance_calendar.view.*
 import java.text.SimpleDateFormat
 
 class AttendanceCalendarAdapter(private val interaction: Interaction? = null) :
     ListAdapter<CalendarItem, AttendanceCalendarAdapter.CalendarViewHolder>(CalendarItemDiffCallback()) {
 
-    val sdf = SimpleDateFormat("dd")
+    private val sdf = SimpleDateFormat("dd")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CalendarViewHolder(
         LayoutInflater.from(parent.context)
@@ -45,9 +45,7 @@ class AttendanceCalendarAdapter(private val interaction: Interaction? = null) :
         }
     }
 
-    interface Interaction {
-
-    }
+    interface Interaction {}
 
     private class CalendarItemDiffCallback : DiffUtil.ItemCallback<CalendarItem>() {
 

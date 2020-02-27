@@ -1,6 +1,8 @@
 package com.pune.dance.fitness.ui.home
 
 import androidx.lifecycle.ViewModel
+import com.pune.dance.fitness.ui.home.models.CalendarItem
+import com.pune.dance.fitness.ui.home.models.PaymentItem
 import java.util.*
 
 class HomeViewModel : ViewModel() {
@@ -10,8 +12,11 @@ class HomeViewModel : ViewModel() {
     fun getAttendanceCalendarItems(): List<CalendarItem> {
         val calendarItems = arrayListOf<CalendarItem>()
 
-        //find min and max dates for current month
+        //resetting to current month
         val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_MONTH, 1)
+
+        //find min and max dates for current month
         val minDay = 1
         val maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
 
@@ -21,6 +26,28 @@ class HomeViewModel : ViewModel() {
             calendarItems.add(CalendarItem(calendar.time))
         }
         return calendarItems
+    }
+
+
+    /**create data or payments*/
+    fun getPaymentItems(): List<PaymentItem> {
+        val paymentItems = arrayListOf<PaymentItem>()
+
+        //resetting to current month
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_MONTH, 1)
+
+        //find min and max dates for current year
+        val minMonth = 0
+        val maxMonth = calendar.getActualMaximum(Calendar.MONTH)
+
+        //creating payment item
+        for (month in minMonth..maxMonth) {
+            calendar.set(Calendar.MONTH, month)
+            paymentItems.add(PaymentItem(calendar.time))
+        }
+
+        return paymentItems
     }
 
 }

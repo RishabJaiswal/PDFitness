@@ -1,4 +1,4 @@
-package com.pune.dance.fitness.ui.home
+package com.pune.dance.fitness.ui.home.models
 
 import java.util.*
 
