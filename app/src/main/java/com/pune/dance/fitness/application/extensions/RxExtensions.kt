@@ -36,6 +36,11 @@ fun <T> Single<T>.subscribeObserverOnMain(): Single<T> {
         .observeOn(AndroidSchedulers.mainThread())
 }
 
+fun <T> Flowable<T>.subscribeObserverOnMain(): Flowable<T> {
+    return this.subscribeOn(AndroidSchedulers.mainThread())
+        .observeOn(AndroidSchedulers.mainThread())
+}
+
 //Rx streams to LiveData
 fun <T> Single<T>.toLiveData(): LiveData<T> {
     return LiveDataReactiveStreams.fromPublisher(this.toFlowable())
