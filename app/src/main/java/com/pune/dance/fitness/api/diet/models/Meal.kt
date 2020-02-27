@@ -2,12 +2,10 @@ package com.pune.dance.fitness.api.diet.models
 
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.PropertyName
-import io.realm.RealmModel
-import io.realm.annotations.RealmClass
+import io.realm.RealmList
 
 @IgnoreExtraProperties
-@RealmClass
-open class Meal : RealmModel {
+class Meal {
 
     @get:PropertyName("meal_name")
     @set:PropertyName("meal_name")
@@ -15,7 +13,11 @@ open class Meal : RealmModel {
 
 
     @get:PropertyName("food_items")
-    @set:PropertyName("food_items")
-    var foodItems: List<Food> = emptyList()
+    var foodItems: RealmList<Food> = RealmList()
+
+    @PropertyName("food_items")
+    fun setFoodItemsList(foodItemsList: ArrayList<Food>) {
+        foodItems.addAll(foodItemsList)
+    }
 
 }
