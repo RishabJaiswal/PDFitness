@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat
 class AttendanceCalendarAdapter(private val interaction: Interaction? = null) :
     ListAdapter<CalendarItem, AttendanceCalendarAdapter.CalendarViewHolder>(CalendarItemDiffCallback()) {
 
-    val sdf = SimpleDateFormat("DD")
+    val sdf = SimpleDateFormat("dd")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CalendarViewHolder(
         LayoutInflater.from(parent.context)
