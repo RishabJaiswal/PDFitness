@@ -28,6 +28,7 @@ class AttendanceCalendarAdapter(private val interaction: Interaction? = null) :
         submitList(data.toMutableList())
     }
 
+    /**View holder*/
     inner class CalendarViewHolder(itemView: View, private val interaction: Interaction?) :
         RecyclerView.ViewHolder(itemView), OnClickListener {
 
@@ -45,8 +46,7 @@ class AttendanceCalendarAdapter(private val interaction: Interaction? = null) :
         }
     }
 
-    interface Interaction {}
-
+    /**Diff callback*/
     private class CalendarItemDiffCallback : DiffUtil.ItemCallback<CalendarItem>() {
 
         override fun areItemsTheSame(oldItem: CalendarItem, newItem: CalendarItem): Boolean {
@@ -57,4 +57,6 @@ class AttendanceCalendarAdapter(private val interaction: Interaction? = null) :
             return oldItem == newItem
         }
     }
+
+    interface Interaction
 }

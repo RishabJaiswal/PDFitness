@@ -34,9 +34,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_meal_name" />
 
-    <!--food item-->
+    <!--meal items-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_diet_food_items"
+        android:id="@+id/rv_diet_meal_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="8dp"
@@ -61,6 +61,6 @@
         android:backgroundTint="#36F5B20C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_diet_food_items" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_diet_meal_items" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

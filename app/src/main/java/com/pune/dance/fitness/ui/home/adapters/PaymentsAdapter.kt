@@ -29,6 +29,7 @@ class PaymentsAdapter(private val interaction: Interaction? = null) :
         submitList(data.toMutableList())
     }
 
+    /**View holder*/
     inner class PaymentViewHolder(itemView: View, private val interaction: Interaction?) :
         RecyclerView.ViewHolder(itemView), OnClickListener {
 
@@ -43,12 +44,13 @@ class PaymentsAdapter(private val interaction: Interaction? = null) :
 
         fun bind(item: PaymentItem) = with(itemView) {
             tv_month_year.text = sdf.format(item.date)
+            //todo: remove dummy data
             tv_month_payment.text = "₹ 1800 Pending"
         }
     }
 
-    interface Interaction {}
 
+    /**Diff callback*/
     private class PaymentItemDiffCallback : DiffUtil.ItemCallback<PaymentItem>() {
 
         override fun areItemsTheSame(oldItem: PaymentItem, newItem: PaymentItem): Boolean {
@@ -59,4 +61,6 @@ class PaymentsAdapter(private val interaction: Interaction? = null) :
             return oldItem == newItem
         }
     }
+
+    interface Interaction
 }
