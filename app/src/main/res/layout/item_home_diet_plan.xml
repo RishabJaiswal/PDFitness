@@ -37,13 +37,15 @@
     <!--meal items-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_diet_meal_items"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:paddingBottom="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:clipToPadding="false"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="4"
         tools:listitem="@layout/item_home_diet_item"
         app:layout_constraintEnd_toEndOf="parent"
