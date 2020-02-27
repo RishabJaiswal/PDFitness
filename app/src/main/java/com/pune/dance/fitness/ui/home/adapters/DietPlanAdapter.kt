@@ -41,8 +41,9 @@ class DietPlanAdapter(private val interaction: Interaction? = null) :
             val clicked = getItem(adapterPosition)
         }
 
-        fun bind(dietPlan: DietPlanItem) = with(itemView) {
-            mealAdapter.update(dietPlan.foodItems)
+        fun bind(dietPlanItem: DietPlanItem) = with(itemView) {
+            tv_meal_name.text = dietPlanItem.mealName
+            mealAdapter.update(dietPlanItem.foodItems)
         }
     }
 
