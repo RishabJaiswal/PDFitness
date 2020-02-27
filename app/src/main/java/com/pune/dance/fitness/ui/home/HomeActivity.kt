@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.extensions.configureViewModel
 import com.pune.dance.fitness.ui.home.adapters.AttendanceCalendarAdapter
+import com.pune.dance.fitness.ui.home.adapters.DietPlanAdapter
 import com.pune.dance.fitness.ui.home.adapters.PaymentsAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -14,6 +15,7 @@ class HomeActivity : AppCompatActivity() {
 
     private val attendanceCalendarAdapter by lazy { AttendanceCalendarAdapter() }
     private val paymentsAdapter by lazy { PaymentsAdapter() }
+    private val dietPlanAdapter by lazy { DietPlanAdapter() }
 
     private val viewModel by lazy {
         configureViewModel<HomeViewModel>()
@@ -24,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setupAttendance()
         setupPayments()
+        setupDietPlan()
     }
 
     private fun setupAttendance() {
@@ -34,6 +37,11 @@ class HomeActivity : AppCompatActivity() {
     private fun setupPayments() {
         rv_payments.adapter = paymentsAdapter
         paymentsAdapter.update(viewModel.getPaymentItems())
+    }
+
+    private fun setupDietPlan() {
+        rv_diet_plan.adapter = dietPlanAdapter
+        dietPlanAdapter.update(viewModel.getDietPlan())
     }
 
     companion object {

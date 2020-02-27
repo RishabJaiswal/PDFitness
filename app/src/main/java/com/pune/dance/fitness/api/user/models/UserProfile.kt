@@ -33,4 +33,9 @@ open class UserProfile : RealmModel {
     @set:PropertyName("session_timing_id")
     var session_timing_id: String = ""
 
+
+    @get:PropertyName("diet_plan_id")
+    @set:PropertyName("diet_plan_id")
+    var dietPlanId: String = ""
+
 }

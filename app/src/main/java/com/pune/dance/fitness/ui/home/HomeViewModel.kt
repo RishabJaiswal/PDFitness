@@ -2,6 +2,8 @@ package com.pune.dance.fitness.ui.home
 
 import androidx.lifecycle.ViewModel
 import com.pune.dance.fitness.ui.home.models.CalendarItem
+import com.pune.dance.fitness.ui.home.models.DietPlanItem
+import com.pune.dance.fitness.ui.home.models.MealItem
 import com.pune.dance.fitness.ui.home.models.PaymentItem
 import java.util.*
 
@@ -48,6 +50,20 @@ class HomeViewModel : ViewModel() {
         }
 
         return paymentItems
+    }
+
+    fun getDietPlan(): List<DietPlanItem> {
+        val dietPlanItems = arrayListOf<DietPlanItem>()
+        dietPlanItems.add(
+            DietPlanItem(
+                arrayListOf(
+                    MealItem("Poha"),
+                    MealItem("Peanuts"),
+                    MealItem("Boiled Broccoli")
+                )
+            )
+        )
+        return dietPlanItems
     }
 
 }
