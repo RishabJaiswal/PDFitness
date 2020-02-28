@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="132dp"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginEnd="20dp"
-    android:background="@drawable/rectangle_rc_10_accent"
-    android:backgroundTint="#36F5B20C">
+    android:background="@drawable/rectangle_white_stroke_grey"
+    android:backgroundTint="#F5DFA6">
 
     <!--meal name-->
     <TextView
@@ -58,11 +58,14 @@
         style="@style/filledUnelevatedButton"
         android:layout_width="0dp"
         android:layout_height="32dp"
+        android:backgroundTint="#36F5B20C"
         android:text="@string/action_more"
         android:textColor="@color/pumpkinOrange"
-        android:backgroundTint="#36F5B20C"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_diet_meal_items" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_diet_meal_items"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
