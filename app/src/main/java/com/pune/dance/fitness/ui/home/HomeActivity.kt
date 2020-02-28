@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.extensions.configureViewModel
+import com.pune.dance.fitness.application.extensions.gone
+import com.pune.dance.fitness.application.extensions.visible
+import com.pune.dance.fitness.application.extensions.visibleOrGone
 import com.pune.dance.fitness.ui.home.adapters.AttendanceCalendarAdapter
 import com.pune.dance.fitness.ui.home.adapters.DietPlanAdapter
 import com.pune.dance.fitness.ui.home.adapters.PaymentsAdapter
@@ -48,13 +51,23 @@ class HomeActivity : AppCompatActivity() {
         viewModel.dietPlanLiveResult.observe(this, Observer {
             it.parseResult({
                 //loading
-                //todo:: show diet progress
+                progress_diet_plan.visible()
             }, { dietPlanItems ->
                 //success
+                progress_diet_plan.gone()
+                blankslate_diet_plan.visibleOrGone(dietPlanItems.isEmpty())
                 dietPlanAdapter.update(dietPlanItems)
+
+                //setting drawable for dietplan
+                imv_diet_plan.setImageResource(
+                    if (dietPlanItems.isEmpty())
+                        R.drawable.blankslate_diet_plan
+                    else
+                        R.drawable.art_diet_plan
+                )
             }, {
                 //error
-                //todo:: show diet error
+                progress_diet_plan.gone()
             })
         })
     }
