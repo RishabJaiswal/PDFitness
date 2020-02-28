@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginEnd="20dp"
     android:background="@drawable/rectangle_white_stroke_grey"
-    android:backgroundTint="#F5DFA6">
+    android:backgroundTint="#FFF0C8">
 
     <!--meal name-->
     <TextView
