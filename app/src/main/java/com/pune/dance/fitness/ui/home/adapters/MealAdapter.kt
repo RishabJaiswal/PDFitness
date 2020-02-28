@@ -14,11 +14,17 @@ import kotlinx.android.synthetic.main.item_home_diet_item.view.*
 class MealAdapter(private val interaction: Interaction? = null) :
     ListAdapter<MealItem, MealAdapter.MealViewHolder>(MealItemDiffCallback()) {
 
+    private val MAX_FOOD_ITEMS = 4
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MealViewHolder(
         LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_home_diet_item, parent, false), interaction
     )
+
+    override fun getItemCount(): Int {
+        return Math.min(super.getItemCount(), MAX_FOOD_ITEMS)
+    }
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) = holder.bind(getItem(position))
 
