@@ -24,15 +24,19 @@ class DietPlanApiManager {
                     }
 
                     //success
-                    if (snapshot != null && snapshot.exists()) {
-                        val dietPlan = snapshot.toObject(DietPlan::class.java)
-                        if (dietPlan != null) {
-                            emitter.onNext(dietPlan)
+                    try {
+                        if (snapshot != null && snapshot.exists()) {
+                            val dietPlan = snapshot.toObject(DietPlan::class.java)
+                            if (dietPlan != null) {
+                                emitter.onNext(dietPlan)
+                            } else {
+                                emitter.onError(ContentNotFoundException())
+                            }
                         } else {
                             emitter.onError(ContentNotFoundException())
                         }
-                    } else {
-                        emitter.onError(ContentNotFoundException())
+                    } catch (error: Exception) {
+                        emitter.onError(error)
                     }
                 }
 
