@@ -39,7 +39,6 @@ class DietPlanApiManager {
                         emitter.onError(error)
                     }
                 }
-
-        }, BackpressureStrategy.BUFFER)
+        }, BackpressureStrategy.LATEST)
     }
 }
