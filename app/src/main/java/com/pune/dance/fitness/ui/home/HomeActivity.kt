@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
-    private val attendanceCalendarAdapter by lazy { AttendanceCalendarAdapter() }
+    private val attendanceCalendarAdapter by lazy { AttendanceCalendarAdapter(this) }
     private val paymentsAdapter by lazy { PaymentsAdapter() }
     private val dietPlanAdapter by lazy { DietPlanAdapter() }
 
@@ -34,8 +34,20 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupAttendance() {
+        viewModel.getAttendanceCalendarItems()
         rv_attendance.adapter = attendanceCalendarAdapter
-        attendanceCalendarAdapter.update(viewModel.getAttendanceCalendarItems())
+        viewModel.attendanceLiveResult.observe(this, Observer {
+            it.parseResult({
+                //loading
+                //todo: add progress
+            }, { attendanceCalendarItems ->
+                //success
+                attendanceCalendarAdapter.update(attendanceCalendarItems)
+            }, {
+                //error
+                //todo: add error
+            })
+        })
     }
 
     private fun setupPayments() {

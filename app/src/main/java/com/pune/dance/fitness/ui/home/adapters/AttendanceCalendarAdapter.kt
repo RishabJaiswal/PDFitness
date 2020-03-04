@@ -1,5 +1,6 @@
 package com.pune.dance.fitness.ui.home.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -8,14 +9,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pune.dance.fitness.R
+import com.pune.dance.fitness.application.extensions.getColor
+import com.pune.dance.fitness.ui.home.models.AttendanceStatus
 import com.pune.dance.fitness.ui.home.models.CalendarItem
 import kotlinx.android.synthetic.main.item_home_attendance_calendar.view.*
 import java.text.SimpleDateFormat
 
-class AttendanceCalendarAdapter(private val interaction: Interaction? = null) :
+class AttendanceCalendarAdapter(
+    private val context: Context,
+    private val interaction: Interaction? = null
+) :
     ListAdapter<CalendarItem, AttendanceCalendarAdapter.CalendarViewHolder>(CalendarItemDiffCallback()) {
 
     private val sdf = SimpleDateFormat("dd")
+    private val presentAttendeeColor by lazy { R.color.grapePurple.getColor(context) }
+    private val absentAttendeeColor by lazy { R.color.pumpkinOrange.getColor(context) }
+    private val unknwownAttendeeColor by lazy { R.color.textDisabled.getColor(context) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CalendarViewHolder(
         LayoutInflater.from(parent.context)
@@ -43,6 +52,11 @@ class AttendanceCalendarAdapter(private val interaction: Interaction? = null) :
 
         fun bind(item: CalendarItem) = with(itemView) {
             tv_date.text = sdf.format(item.date)
+            when (item.status) {
+                AttendanceStatus.PRESENT -> tv_date.setTextColor(presentAttendeeColor)
+                AttendanceStatus.ABSENT -> tv_date.setTextColor(absentAttendeeColor)
+                else -> tv_date.setTextColor(unknwownAttendeeColor)
+            }
         }
     }
 

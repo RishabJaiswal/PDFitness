@@ -19,6 +19,6 @@
         android:layout_gravity="center"
         android:fontFamily="@font/montserrat_semibold"
         android:textSize="@dimen/txt_title"
-        android:textColor="@color/grapePurple" />
+        android:textColor="@color/textSecondary" />
 
 </androidx.cardview.widget.CardView>
