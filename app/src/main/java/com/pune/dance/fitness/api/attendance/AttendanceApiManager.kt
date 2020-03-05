@@ -4,6 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.pune.dance.fitness.api.attendance.models.Attendance
 import com.pune.dance.fitness.application.extensions.parseToModelsList
 import io.reactivex.BackpressureStrategy
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,5 +31,18 @@ class AttendanceApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThre
                         })
                 }
         }, BackpressureStrategy.LATEST)
+    }
+
+    fun markAttendance(userId: String, sessionId: String, attendance: Attendance): Completable {
+        return Completable.create { emitter ->
+            firestoreDb.collection("session_attendance")
+                .add(attendance)
+                .addOnSuccessListener { _docReference ->
+                    emitter.onComplete()
+                }
+                .addOnFailureListener { error ->
+                    emitter.onError(error)
+                }
+        }
     }
 }
