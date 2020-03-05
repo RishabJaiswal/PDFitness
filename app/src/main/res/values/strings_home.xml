@@ -7,6 +7,9 @@
     <string name="attendance_ask_presence_msg">You have been regular and extremely passionate. Don\'t miss the class!</string>
     <string name="attendance_ask_action_primary">Yes, Let\'s do it</string>
     <string name="attendance_ask_action_secondary">No</string>
+    <string name="attendance_status_present">Worked out! :)</string>
+    <string name="attendance_status_absent">Missed it! :(</string>
+    <string name="attendance_status_no_session">No session</string>
 
     <!--payments-->
     <string name="lbl_payments">Payments</string>
