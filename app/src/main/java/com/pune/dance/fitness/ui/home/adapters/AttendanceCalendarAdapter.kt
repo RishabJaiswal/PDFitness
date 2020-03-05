@@ -112,7 +112,7 @@ class AttendanceCalendarAdapter(
     private class CalendarItemDiffCallback : DiffUtil.ItemCallback<CalendarItem>() {
 
         override fun areItemsTheSame(oldItem: CalendarItem, newItem: CalendarItem): Boolean {
-            return oldItem == newItem
+            return oldItem === newItem
         }
 
         override fun areContentsTheSame(oldItem: CalendarItem, newItem: CalendarItem): Boolean {
