@@ -12,18 +12,18 @@ class LiveResult<T> : MutableLiveData<Result<T>>() {
         value = Result.success(data)
     }
 
+    /**this used when setting value from background thread*/
+    fun postSucess(data: T) {
+        postValue(Result.success(data))
+    }
+
     fun error(error: Throwable) {
         value = Result.error(error)
     }
 
-    fun isLoading() = this.value is Result.Progress
-
-    fun getResult(): T? {
-        val resultValue = this.value
-        return if (resultValue is Result.Success) {
-            return resultValue.data
-
-        } else null
-    }
+    fun isLoading() = this.value?.isLoading() ?: false
+    fun isSuccess() = this.value?.isSuccess() ?: false
+    fun isError() = this.value?.isError() ?: false
+    fun getResult() = this.value?.getResult()
 
 }

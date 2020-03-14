@@ -16,6 +16,13 @@ sealed class Result<T> {
     fun isError() = this is Error
     fun isSuccess() = this is Success
 
+    fun getResult(): T? {
+        return if (this is Result.Success) {
+            return this.data
+
+        } else null
+    }
+
     fun parseResult(
         progress: () -> Unit,
         success: (data: T) -> Unit,
