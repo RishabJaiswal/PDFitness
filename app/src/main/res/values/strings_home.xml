@@ -7,6 +7,18 @@
     <string name="attendance_ask_presence_msg">You have been regular and extremely passionate. Don\'t miss the class!</string>
     <string name="attendance_ask_action_primary">Yes, Let\'s do it</string>
     <string name="attendance_ask_action_secondary">No</string>
+
+    <!--marked present-->
+    <string name="attendance_marked_present_title">Cheers</string>
+    <string name="attendance_marked_present_msg">You are awesome. You are joining today. Hope there are no change of plans.</string>
+    <string name="attendance_marked_present_action_secondary">I had a change of plans</string>
+
+    <!--marked absent-->
+    <string name="attendance_marked_absent_title">Why?</string>
+    <string name="attendance_marked_absent_msg">Why won\'t you join the fun today. It will be amazing if you join the class. Would you like to join?</string>
+    <string name="attendance_marked_absent_action_primary">Yes, let\'s do it</string>
+
+    <!--attendance calendar status-->
     <string name="attendance_status_present">Worked out! :)</string>
     <string name="attendance_status_absent">Missed it! :(</string>
     <string name="attendance_status_no_session">No session</string>
