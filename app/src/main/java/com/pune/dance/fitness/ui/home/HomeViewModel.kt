@@ -189,6 +189,24 @@ class HomeViewModel : ViewModel() {
         }
     }
 
+    fun getAttendanceDrawable(attendanceStatus: AttendanceStatus?): Int {
+        return when (attendanceStatus) {
+            AttendanceStatus.PRESENT -> R.drawable.art_attendance_present
+            AttendanceStatus.ABSENT -> R.drawable.art_attendance_absent
+            AttendanceStatus.UNKNOWN -> R.drawable.art_attendance_ask
+            else -> R.drawable.art_attendance_ask
+        }
+    }
+
+    fun getAttendanceColor(attendanceStatus: AttendanceStatus?): Int {
+        return when (attendanceStatus) {
+            AttendanceStatus.PRESENT -> R.color.attendance_present
+            AttendanceStatus.ABSENT -> R.color.attendance_absent
+            AttendanceStatus.UNKNOWN -> R.color.attendance_ask
+            else -> R.color.attendance_ask
+        }
+    }
+
     fun getUserId() = user?.id ?: ""
     fun getFitnessSessionId() = userProfile?.fitness_session_id ?: ""
 

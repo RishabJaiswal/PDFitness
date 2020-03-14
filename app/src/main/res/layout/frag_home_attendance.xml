@@ -36,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:background="#055B1E5D"
             app:layout_constraintBottom_toBottomOf="@+id/barrier_actions"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:foregroundGravity="right"
-            android:src="@drawable/ic_attendance_going"
+            android:src="@drawable/art_attendance_ask"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="@+id/scrim_attendance"
             app:layout_constraintEnd_toStartOf="@+id/guideline_mark_attendance"

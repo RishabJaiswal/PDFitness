@@ -9,8 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.extensions.configureViewModel
+import com.pune.dance.fitness.application.extensions.getColor
+import com.pune.dance.fitness.application.extensions.getDrawable
 import com.pune.dance.fitness.databinding.FragHomeAttendanceBinding
 import com.pune.dance.fitness.ui.home.HomeViewModel
+import kotlinx.android.synthetic.main.frag_home_attendance.*
 
 class AttendanceFragment : Fragment() {
 
@@ -37,9 +40,22 @@ class AttendanceFragment : Fragment() {
             it.parseResult({
                 //loading
                 //todo: add progress
-            }, {
+            }, { attendanceStatus ->
                 //success
+                context?.let { _context ->
 
+                    //image
+                    imv_attendance.setImageDrawable(
+                        viewModel.getAttendanceDrawable(attendanceStatus)
+                            .getDrawable(_context)
+                    )
+
+                    //attendance scrim color
+                    scrim_attendance.setBackgroundColor(
+                        viewModel.getAttendanceColor(attendanceStatus)
+                            .getColor(_context)
+                    )
+                }
             }, {
                 //error
                 //todo: add error
