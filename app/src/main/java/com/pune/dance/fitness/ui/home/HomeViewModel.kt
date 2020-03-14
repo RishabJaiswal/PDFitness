@@ -1,6 +1,7 @@
 package com.pune.dance.fitness.ui.home
 
 import androidx.lifecycle.ViewModel
+import com.pune.dance.fitness.R
 import com.pune.dance.fitness.api.attendance.AttendanceApiManager
 import com.pune.dance.fitness.api.diet.DietPlanApiManager
 import com.pune.dance.fitness.application.LiveResult
@@ -18,8 +19,10 @@ class HomeViewModel : ViewModel() {
     private val userDao = UserDao()
     private val dietPlanApiManager = DietPlanApiManager()
     private val attendanceApiManager = AttendanceApiManager()
+
     val dietPlanLiveResult = LiveResult<List<DietPlanItem>>()
     val attendanceLiveResult = LiveResult<List<CalendarItem>>()
+    val nextSessionAttendanceLiveResult = LiveResult<AttendanceStatus>()
 
     private val user = userDao.getUser()
     private val userProfile = userDao.getUserProfile(getUserId())
@@ -62,16 +65,42 @@ class HomeViewModel : ViewModel() {
                 }
                 return@map calendarItems
             }
+            .doOnSubscribe { attendanceLiveResult.loading() }
             .subscribeObserverOnMain()
             .subscribe({ calendarItems ->
                 attendanceLiveResult.success(calendarItems)
             }, {
-                logError(message = "Attendance failure", throwable = it)
+                logError(message = "Attendance fetch failure", throwable = it)
                 attendanceLiveResult.error(error = it)
             })
             .addTo(disposable)
     }
 
+
+    /**getting attendance for next session*/
+    fun getNextSessionAttendance() {
+        attendanceApiManager.getAttendance(getUserId(), getFitnessSessionId(), Date().stripTime(), getNextSessionDate())
+            .map { attendanceList ->
+                return@map if (attendanceList.isEmpty()) {
+                    AttendanceStatus.UNKNOWN
+                } else {
+                    AttendanceStatus.from(attendanceList[0].status)
+                }
+            }
+            .doOnSubscribe { nextSessionAttendanceLiveResult.loading() }
+            .subscribeObserverOnMain()
+            .subscribe({ status ->
+                nextSessionAttendanceLiveResult.success(status)
+            }, {
+                logError(message = "Next session attendance fetch failure", throwable = it)
+            })
+            .addTo(disposable)
+    }
+
+    private fun getNextSessionDate(): Date {
+        //todo: correct logic
+        return Date()
+    }
 
     /**create data or payments*/
     fun getPaymentItems(): List<PaymentItem> {
@@ -122,6 +151,42 @@ class HomeViewModel : ViewModel() {
                 dietPlanLiveResult.error(error = it)
             })
             .addTo(disposable)
+    }
+
+    fun getAttendanceMsg(attendanceStatus: AttendanceStatus?): Int {
+        return when (attendanceStatus) {
+            AttendanceStatus.PRESENT -> R.string.attendance_marked_present_msg
+            AttendanceStatus.ABSENT -> R.string.attendance_marked_absent_msg
+            AttendanceStatus.UNKNOWN -> R.string.attendance_ask_presence_msg
+            else -> R.string.error_unknown
+        }
+    }
+
+    fun getAttendanceTitle(attendanceStatus: AttendanceStatus?): Int {
+        return when (attendanceStatus) {
+            AttendanceStatus.PRESENT -> R.string.attendance_marked_present_title
+            AttendanceStatus.ABSENT -> R.string.attendance_marked_absent_title
+            AttendanceStatus.UNKNOWN -> R.string.attendance_ask_presence
+            else -> R.string.error_unknown
+        }
+    }
+
+    fun getAttendancePrimaryAction(attendanceStatus: AttendanceStatus?): Int {
+        return when (attendanceStatus) {
+            AttendanceStatus.PRESENT -> R.string.empty_string
+            AttendanceStatus.ABSENT -> R.string.attendance_marked_absent_action_primary
+            AttendanceStatus.UNKNOWN -> R.string.attendance_ask_action_primary
+            else -> R.string.empty_string
+        }
+    }
+
+    fun getAttendanceSecondaryAction(attendanceStatus: AttendanceStatus?): Int {
+        return when (attendanceStatus) {
+            AttendanceStatus.PRESENT -> R.string.attendance_marked_present_action_secondary
+            AttendanceStatus.ABSENT -> R.string.empty_string
+            AttendanceStatus.UNKNOWN -> R.string.attendance_ask_action_secondary
+            else -> R.string.empty_string
+        }
     }
 
     fun getUserId() = user?.id ?: ""

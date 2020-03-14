@@ -13,6 +13,7 @@ import com.pune.dance.fitness.application.extensions.visibleOrGone
 import com.pune.dance.fitness.ui.home.adapters.AttendanceCalendarAdapter
 import com.pune.dance.fitness.ui.home.adapters.DietPlanAdapter
 import com.pune.dance.fitness.ui.home.adapters.PaymentsAdapter
+import com.pune.dance.fitness.ui.home.fragments.AttendanceFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -48,6 +49,15 @@ class HomeActivity : AppCompatActivity() {
                 //todo: add error
             })
         })
+        setNextSession()
+    }
+
+    /**this is to display user's next session attendance*/
+    private fun setNextSession() {
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.container, AttendanceFragment())
+                .commit()
+        }
     }
 
     private fun setupPayments() {

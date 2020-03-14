@@ -63,91 +63,13 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_label_attendance"
             tools:listitem="@layout/item_home_attendance_calendar" />
 
-        <!--giudeline-->
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_mark_attendance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
-
-        <!--attendance presence background scrim-->
-        <View
-            android:id="@+id/scrim_attendance"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:background="#055B1E5D"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_presence_action_primary"
-            app:layout_constraintTop_toBottomOf="@+id/rv_attendance" />
-
-        <!--attendance image-->
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imv_attendance"
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constrainedHeight="true"
-            android:foregroundGravity="right"
-            android:src="@drawable/ic_attendance_going"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/rv_attendance"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/scrim_attendance"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_mark_attendance"
-            app:layout_constraintTop_toBottomOf="@+id/rv_attendance" />
-
-        <!--mark attendance title-->
-        <TextView
-            android:id="@+id/tv_mark_attend_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/attendance_ask_presence"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/txt_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline_mark_attendance"
-            app:layout_constraintTop_toTopOf="@+id/scrim_attendance" />
-
-        <!--mark attendance msg-->
-        <TextView
-            android:id="@+id/tv_mark_attend_msg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/attendance_ask_presence_msg"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/txt_caption"
-            app:layout_constraintEnd_toEndOf="@+id/tv_mark_attend_title"
-            app:layout_constraintStart_toStartOf="@+id/tv_mark_attend_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_mark_attend_title" />
-
-        <!--attendance primary action-->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/tv_presence_action_primary"
-            style="@style/TextButton"
-            android:layout_marginTop="8dp"
-            android:text="@string/attendance_ask_action_primary"
-            android:textAllCaps="false"
-            android:textColor="@color/textPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/tv_mark_attend_msg"
-            app:layout_constraintTop_toBottomOf="@+id/tv_mark_attend_msg" />
-
-        <!--attendance secondary action-->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton"
-            style="@style/TextButton"
-            android:layout_marginEnd="16dp"
-            android:text="@string/attendance_ask_action_secondary"
-            android:textAllCaps="false"
-            android:textColor="@color/textSecondary"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_presence_action_primary"
-            app:layout_constraintEnd_toStartOf="@+id/tv_presence_action_primary"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline_mark_attendance"
-            app:layout_constraintTop_toTopOf="@+id/tv_presence_action_primary" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!--payments-->
         <TextView
@@ -157,7 +79,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/lbl_payments"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrim_attendance" />
+            app:layout_constraintTop_toBottomOf="@+id/container" />
 
         <!--payments list-->
         <androidx.recyclerview.widget.RecyclerView
