@@ -13,9 +13,10 @@ import com.pune.dance.fitness.application.extensions.getColor
 import com.pune.dance.fitness.application.extensions.getDrawable
 import com.pune.dance.fitness.databinding.FragHomeAttendanceBinding
 import com.pune.dance.fitness.ui.home.HomeViewModel
+import com.pune.dance.fitness.ui.home.models.AttendanceStatus
 import kotlinx.android.synthetic.main.frag_home_attendance.*
 
-class AttendanceFragment : Fragment() {
+class AttendanceFragment : Fragment(), View.OnClickListener {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragHomeAttendanceBinding
@@ -31,6 +32,8 @@ class AttendanceFragment : Fragment() {
         viewModel = configureViewModel()
         binding.viewModel = viewModel
         binding.fragment = this
+        binding.btnActionPrimary.setOnClickListener(this)
+        binding.btnActionSecondary.setOnClickListener(this)
         viewModel.getNextSessionAttendance()
         observeNextSessionAttendance()
     }
@@ -62,6 +65,21 @@ class AttendanceFragment : Fragment() {
             })
         })
     }
+
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+
+            R.id.btn_action_primary -> {
+                viewModel.markAttendance(AttendanceStatus.PRESENT)
+            }
+
+            R.id.btn_action_secondary -> {
+                viewModel.markAttendance(AttendanceStatus.ABSENT)
+            }
+        }
+    }
+
 
     companion object {
         fun newInstance() = AttendanceFragment()
