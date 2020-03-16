@@ -5,6 +5,10 @@ import com.google.firebase.firestore.PropertyName
 
 class Attendance {
 
+    @get:PropertyName("_id")
+    @set:PropertyName("_id")
+    var id: String = ""
+
     @get:PropertyName("session_id")
     @set:PropertyName("session_id")
     var sessionId: String = ""

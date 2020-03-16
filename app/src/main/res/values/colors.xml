@@ -25,5 +25,9 @@
     <color name="berry">#9e1660</color>
     <color name="pumpkinOrange">#f48617</color>
 
+    <color name="attendance_ask">#FCFAFC</color>
+    <color name="attendance_present">#FCECF2</color>
+    <color name="attendance_absent">#FEEDDC</color>
+
     <color name="profile_item_tint">#FFC330</color>
 </resources>

@@ -41,6 +41,11 @@ fun <T> Flowable<T>.subscribeObserverOnMain(): Flowable<T> {
         .observeOn(AndroidSchedulers.mainThread())
 }
 
+fun Completable.subscribeObserverOnMain(): Completable {
+    return this.subscribeOn(AndroidSchedulers.mainThread())
+        .observeOn(AndroidSchedulers.mainThread())
+}
+
 //Rx streams to LiveData
 fun <T> Single<T>.toLiveData(): LiveData<T> {
     return LiveDataReactiveStreams.fromPublisher(this.toFlowable())

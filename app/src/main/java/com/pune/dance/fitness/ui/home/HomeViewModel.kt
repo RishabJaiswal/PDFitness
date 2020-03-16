@@ -1,8 +1,10 @@
 package com.pune.dance.fitness.ui.home
 
 import androidx.lifecycle.ViewModel
+import com.google.firebase.Timestamp
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.api.attendance.AttendanceApiManager
+import com.pune.dance.fitness.api.attendance.models.Attendance
 import com.pune.dance.fitness.api.diet.DietPlanApiManager
 import com.pune.dance.fitness.application.LiveResult
 import com.pune.dance.fitness.application.extensions.addTo
@@ -27,6 +29,7 @@ class HomeViewModel : ViewModel() {
     private val user = userDao.getUser()
     private val userProfile = userDao.getUserProfile(getUserId())
     private val disposable by lazy { CompositeDisposable() }
+    private var nextSessionAttendance: Attendance? = null
 
     /**create data or attendance calendar*/
 
@@ -100,6 +103,30 @@ class HomeViewModel : ViewModel() {
     private fun getNextSessionDate(): Date {
         //todo: correct logic
         return Date()
+    }
+
+    /**set attendance status*/
+    fun markAttendance(status: AttendanceStatus) {
+        //creating attendance object to be saved
+        if (nextSessionAttendance == null) {
+            nextSessionAttendance = Attendance().apply {
+                date = Timestamp(getNextSessionDate())
+                sessionId = getFitnessSessionId()
+                userId = getUserId()
+            }
+        }
+        nextSessionAttendance?.status = status.value
+
+        //api call
+        attendanceApiManager.markAttendance(nextSessionAttendance!!)
+            .doOnSubscribe { nextSessionAttendanceLiveResult.loading() }
+            .subscribeObserverOnMain()
+            .subscribe({
+                nextSessionAttendanceLiveResult.success(status)
+            }, {
+                logError(message = "Next session attendance fetch failure", throwable = it)
+            })
+            .addTo(disposable)
     }
 
     /**create data or payments*/
@@ -186,6 +213,24 @@ class HomeViewModel : ViewModel() {
             AttendanceStatus.ABSENT -> R.string.empty_string
             AttendanceStatus.UNKNOWN -> R.string.attendance_ask_action_secondary
             else -> R.string.empty_string
+        }
+    }
+
+    fun getAttendanceDrawable(attendanceStatus: AttendanceStatus?): Int {
+        return when (attendanceStatus) {
+            AttendanceStatus.PRESENT -> R.drawable.art_attendance_present
+            AttendanceStatus.ABSENT -> R.drawable.art_attendance_absent
+            AttendanceStatus.UNKNOWN -> R.drawable.art_attendance_ask
+            else -> R.drawable.art_attendance_ask
+        }
+    }
+
+    fun getAttendanceColor(attendanceStatus: AttendanceStatus?): Int {
+        return when (attendanceStatus) {
+            AttendanceStatus.PRESENT -> R.color.attendance_present
+            AttendanceStatus.ABSENT -> R.color.attendance_absent
+            AttendanceStatus.UNKNOWN -> R.color.attendance_ask
+            else -> R.color.attendance_ask
         }
     }
 

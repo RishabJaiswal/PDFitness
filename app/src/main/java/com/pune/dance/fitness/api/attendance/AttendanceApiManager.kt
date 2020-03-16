@@ -33,10 +33,24 @@ class AttendanceApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThre
         }, BackpressureStrategy.LATEST)
     }
 
-    fun markAttendance(userId: String, sessionId: String, attendance: Attendance): Completable {
+    fun markAttendance(attendance: Attendance): Completable {
         return Completable.create { emitter ->
-            firestoreDb.collection("session_attendance")
-                .add(attendance)
+
+            //creating attendance document
+            val document = firestoreDb.collection("session_attendance")
+                .let { collectionRef ->
+                    if (attendance.id.isEmpty()) {
+                        collectionRef.document().apply {
+                            attendance.id = this.id
+                        }
+                    } else {
+                        collectionRef.document(attendance.id)
+                    }
+                }
+
+            //setting
+            document
+                .set(attendance)
                 .addOnSuccessListener { _docReference ->
                     emitter.onComplete()
                 }
