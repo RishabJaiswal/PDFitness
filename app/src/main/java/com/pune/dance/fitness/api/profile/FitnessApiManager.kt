@@ -27,4 +27,23 @@ class FitnessApiManager {
                 }
         }
     }
+
+    fun getFitnessSessionById(sessionId: String): Single<FitnessSession> {
+        return Single.create { emitter ->
+
+            firestoreDB.collection("fitness_sessions")
+                .document(sessionId)
+                .get()
+                .addOnSuccessListener { document ->
+                    //success
+                    document.toObject(FitnessSession::class.java)?.let { fitnessSession ->
+                        emitter.onSuccess(fitnessSession)
+                    } ?: emitter.onError(NullPointerException("Unable to cast document"))
+                }
+                .addOnFailureListener { error ->
+                    //error
+                    emitter.onError(error)
+                }
+        }
+    }
 }

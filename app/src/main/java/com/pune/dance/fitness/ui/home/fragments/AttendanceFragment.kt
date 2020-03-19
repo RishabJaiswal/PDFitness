@@ -34,7 +34,7 @@ class AttendanceFragment : Fragment(), View.OnClickListener {
         binding.fragment = this
         binding.btnActionPrimary.setOnClickListener(this)
         binding.btnActionSecondary.setOnClickListener(this)
-        viewModel.getNextSessionAttendance()
+        viewModel.fetchFitnessSession()
         observeNextSessionAttendance()
     }
 

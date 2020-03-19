@@ -6,6 +6,8 @@ import com.pune.dance.fitness.R
 import com.pune.dance.fitness.api.attendance.AttendanceApiManager
 import com.pune.dance.fitness.api.attendance.models.Attendance
 import com.pune.dance.fitness.api.diet.DietPlanApiManager
+import com.pune.dance.fitness.api.profile.FitnessApiManager
+import com.pune.dance.fitness.api.profile.models.FitnessSession
 import com.pune.dance.fitness.application.LiveResult
 import com.pune.dance.fitness.application.extensions.addTo
 import com.pune.dance.fitness.application.extensions.logError
@@ -14,6 +16,7 @@ import com.pune.dance.fitness.application.extensions.subscribeObserverOnMain
 import com.pune.dance.fitness.data.UserDao
 import com.pune.dance.fitness.ui.home.models.*
 import io.reactivex.disposables.CompositeDisposable
+import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeViewModel : ViewModel() {
@@ -21,15 +24,18 @@ class HomeViewModel : ViewModel() {
     private val userDao = UserDao()
     private val dietPlanApiManager = DietPlanApiManager()
     private val attendanceApiManager = AttendanceApiManager()
+    private val fitnessApiManager = FitnessApiManager()
 
     val dietPlanLiveResult = LiveResult<List<DietPlanItem>>()
     val attendanceLiveResult = LiveResult<List<CalendarItem>>()
     val nextSessionAttendanceLiveResult = LiveResult<AttendanceStatus>()
+    lateinit var nextSessionDate: Date
+    private var nextSessionAttendance: Attendance? = null
+    private var fitnessSession: FitnessSession? = null
 
     private val user = userDao.getUser()
     private val userProfile = userDao.getUserProfile(getUserId())
     private val disposable by lazy { CompositeDisposable() }
-    private var nextSessionAttendance: Attendance? = null
 
     /**create data or attendance calendar*/
 
@@ -80,14 +86,31 @@ class HomeViewModel : ViewModel() {
     }
 
 
+    /**get user's fitness session*/
+    fun fetchFitnessSession() {
+        fitnessApiManager.getFitnessSessionById(getFitnessSessionId())
+            .subscribeObserverOnMain()
+            .doOnSubscribe { nextSessionAttendanceLiveResult.loading() }
+            .subscribe({ session ->
+                fitnessSession = session
+                extractNextSessionDate(session)
+                fetchNextSessionAttendance()
+            }, {
+                logError(message = "Unable to fetch fitness session", throwable = it)
+                nextSessionAttendanceLiveResult.error(error = it)
+            })
+            .addTo(disposable)
+    }
+
     /**getting attendance for next session*/
-    fun getNextSessionAttendance() {
-        attendanceApiManager.getAttendance(getUserId(), getFitnessSessionId(), Date().stripTime(), getNextSessionDate())
+    fun fetchNextSessionAttendance() {
+        attendanceApiManager.getAttendance(getUserId(), getFitnessSessionId(), Date().stripTime(), nextSessionDate)
             .map { attendanceList ->
                 return@map if (attendanceList.isEmpty()) {
                     AttendanceStatus.UNKNOWN
                 } else {
-                    AttendanceStatus.from(attendanceList[0].status)
+                    nextSessionAttendance = attendanceList[0]
+                    AttendanceStatus.from(nextSessionAttendance?.status ?: "")
                 }
             }
             .doOnSubscribe { nextSessionAttendanceLiveResult.loading() }
@@ -96,13 +119,46 @@ class HomeViewModel : ViewModel() {
                 nextSessionAttendanceLiveResult.success(status)
             }, {
                 logError(message = "Next session attendance fetch failure", throwable = it)
+                nextSessionAttendanceLiveResult.error(error = it)
             })
             .addTo(disposable)
     }
 
-    private fun getNextSessionDate(): Date {
-        //todo: correct logic
-        return Date()
+
+    /**get the next date for a given fitness session*/
+    private fun extractNextSessionDate(session: FitnessSession) {
+        val now = Calendar.getInstance()
+
+        //getting next session day
+        var nextSessionDay = -1
+        val currentDay = now.get(Calendar.DAY_OF_WEEK)
+        session.days.forEach { day ->
+            if (day >= currentDay) {
+                nextSessionDay = day
+                return@forEach
+            }
+        }
+
+        //setting date and time
+        val sdfDate = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val sdfTime = SimpleDateFormat("hh:mm:ss z", Locale.getDefault())
+        val sdfNextSession = SimpleDateFormat("dd MMM yyyy hh:mm:ss z", Locale.getDefault())
+
+        val sessionTime = fitnessSession?.timings?.get(0)?.time?.toDate() ?: Date()
+        val nextSessionCalendar = Calendar.getInstance().apply {
+            time = sdfNextSession.parse("${sdfDate.format(now.time)} ${sdfTime.format(sessionTime)}") ?: now.time
+        }
+
+        //getting next session day
+        if (nextSessionDay == -1) {
+            nextSessionDay = fitnessSession?.days?.get(0) ?: -1
+            nextSessionCalendar.add(Calendar.WEEK_OF_MONTH, 1)
+        }
+
+        //setting final day, date, and clock time
+        nextSessionCalendar.set(Calendar.DAY_OF_WEEK, nextSessionDay)
+
+        nextSessionDate = nextSessionCalendar.time
     }
 
     /**set attendance status*/
@@ -110,7 +166,7 @@ class HomeViewModel : ViewModel() {
         //creating attendance object to be saved
         if (nextSessionAttendance == null) {
             nextSessionAttendance = Attendance().apply {
-                date = Timestamp(getNextSessionDate())
+                date = Timestamp(nextSessionDate)
                 sessionId = getFitnessSessionId()
                 userId = getUserId()
             }

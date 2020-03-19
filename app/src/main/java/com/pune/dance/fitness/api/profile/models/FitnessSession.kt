@@ -13,10 +13,13 @@ data class FitnessSession(
     @set:PropertyName("display_address")
     var displayAddress: String = "",
 
-
     @get:PropertyName("location")
     @set:PropertyName("location")
     var location: GeoPoint? = null,
+
+    @get:PropertyName("days")
+    @set:PropertyName("days")
+    var days: List<Int> = emptyList(),
 
     @get:PropertyName("timings")
     @set:PropertyName("timings")
