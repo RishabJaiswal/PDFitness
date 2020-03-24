@@ -1,98 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context="com.pune.dance.fitness.ui.external.ExternalSessionActivity">
 
-    <!--artwork-->
-    <ImageView
-        android:id="@+id/iv_art_session"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/art_external_session"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_session_link"
-        app:layout_constraintVertical_bias="1.0" />
+    <data>
 
-    <!--image for session [Logo]-->
-    <ImageView
-        android:id="@+id/iv_session"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/tv_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35000002"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/logo_vector" />
+        <variable
+            name="onlineSession"
+            type="com.pune.dance.fitness.api.profile.models.OnlineSession" />
+    </data>
 
-    <!--title-->
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:textAlignment="center"
-        android:textColor="@color/textPrimary"
-        android:textSize="@dimen/txt_24"
-        app:layout_constraintBottom_toTopOf="@+id/tv_session_direction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_session"
-        tools:text="We are working out online" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!--session direction-->
-    <TextView
-        android:id="@+id/tv_session_direction"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/montserrat_semibold"
-        android:textAlignment="center"
-        android:textColor="@color/squash"
-        app:layout_constraintBottom_toTopOf="@+id/tv_message"
-        app:layout_constraintEnd_toEndOf="@+id/tv_title"
-        app:layout_constraintStart_toStartOf="@+id/tv_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title"
-        tools:text="Today, 7 pm" />
+        <!--artwork-->
+        <ImageView
+            android:id="@+id/iv_art_session"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/art_external_session"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_session_link"
+            app:layout_constraintVertical_bias="1.0" />
 
-    <!--session message-->
-    <TextView
-        android:id="@+id/tv_message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
-        android:textColor="@color/textPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/btn_session_link"
-        app:layout_constraintEnd_toEndOf="@+id/tv_session_direction"
-        app:layout_constraintStart_toStartOf="@+id/tv_session_direction"
-        app:layout_constraintTop_toBottomOf="@+id/tv_session_direction"
-        tools:text="Amid the ongoing COVID-19 pandemic, we have  decided to take fitness online" />
+        <!--image for session [Logo]-->
+        <ImageView
+            android:id="@+id/iv_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35000002"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:srcCompat="@drawable/logo_vector" />
 
-    <!--session link-->
-    <Button
-        android:id="@+id/btn_session_link"
-        style="@style/filledUnelevatedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#335B1E5D"
-        android:textAllCaps="false"
-        android:textColor="@color/grapePurple"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_message"
-        tools:text="Join Workout" />
+        <!--title-->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/txt_24"
+            android:text="@{onlineSession.title}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_session_direction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_session"
+            tools:text="We are working out online" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!--session direction-->
+        <TextView
+            android:id="@+id/tv_session_direction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textAlignment="center"
+            android:textColor="@color/squash"
+            android:text="@{onlineSession.directions}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_message"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="Today, 7 pm" />
+
+        <!--session message-->
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{onlineSession.message}"
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/btn_session_link"
+            app:layout_constraintEnd_toEndOf="@+id/tv_session_direction"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_session_direction"
+            app:layout_constraintTop_toBottomOf="@+id/tv_session_direction"
+            tools:text="Amid the ongoing COVID-19 pandemic, we have  decided to take fitness online" />
+
+        <!--session link-->
+        <Button
+            android:id="@+id/btn_session_link"
+            style="@style/filledUnelevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#225B1E5D"
+            android:textAllCaps="false"
+            android:textColor="@color/grapePurple"
+            android:text="@{onlineSession.actionPrimaryText}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_message"
+            tools:text="Join Workout" />
+
+        <!--group-->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_session_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="tv_title,tv_message,tv_session_direction,btn_session_link"
+            tools:visibility="visible" />
+
+        <!--progress-->
+        <ProgressBar
+            android:id="@+id/pb_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/iv_art_session"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_session" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

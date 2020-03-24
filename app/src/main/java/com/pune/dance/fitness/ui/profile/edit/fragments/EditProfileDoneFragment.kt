@@ -8,7 +8,7 @@ import com.pune.dance.fitness.application.BaseFragment
 import com.pune.dance.fitness.application.extensions.configureViewModel
 import com.pune.dance.fitness.application.extensions.invisible
 import com.pune.dance.fitness.application.extensions.visible
-import com.pune.dance.fitness.ui.home.HomeActivity
+import com.pune.dance.fitness.ui.external.ExternalSessionActivity
 import com.pune.dance.fitness.ui.profile.edit.EditProfileViewModel
 import kotlinx.android.synthetic.main.frag_edit_profile_done.*
 
@@ -47,7 +47,7 @@ class EditProfileDoneFragment : BaseFragment(), View.OnClickListener {
                 group_progress_update_profile.visible()
             }, {
                 activity?.let { _activity ->
-                    startActivity(HomeActivity.getIntent(_activity))
+                    startActivity(ExternalSessionActivity.getIntent(_activity))
                     _activity.finish()
                 }
             }, {
