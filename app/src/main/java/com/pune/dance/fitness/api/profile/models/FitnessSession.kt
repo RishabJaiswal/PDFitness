@@ -23,5 +23,9 @@ data class FitnessSession(
 
     @get:PropertyName("timings")
     @set:PropertyName("timings")
-    var timings: List<FitnessSessionTiming> = emptyList()
+    var timings: List<FitnessSessionTiming> = emptyList(),
+
+    @get:PropertyName("online")
+    @set:PropertyName("online")
+    var onlineSession: OnlineSession? = null
 )
