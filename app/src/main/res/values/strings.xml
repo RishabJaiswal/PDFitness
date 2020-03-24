@@ -3,4 +3,9 @@
     <string name="rupees">\u20B9 %d</string>
     <string name="msg_profile_update">Updating your profile</string>
     <string name="empty_string"></string>
+
+    <!--ad request-->
+    <string name="ad_request_title">One last step</string>
+    <string name="ad_request_msg">Please watch an Ad before joining. It helps in supporting us and creating these awesome services for you</string>
+    <string name="ad_request_btn">Watch and join</string>
 </resources>

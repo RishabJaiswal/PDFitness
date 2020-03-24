@@ -52,14 +52,16 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
 
             R.id.btn_session_link -> {
                 binding.onlineSession?.let { onlineSession ->
-                    if (onlineSession.link.isEmpty()) {
 
+                    if (onlineSession.link.isEmpty()) {
                         //empty link
                         createToast(getString(R.string.hint_offtime_session, binding.onlineSession?.directions))
                             .apply {
                                 setGravity(Gravity.TOP, 0, 16.dpToPixels(this@ExternalSessionActivity))
                                 show()
                             }
+                    } else {
+                        startActivity(AdRequestActivity.getIntent(this))
                     }
                 }
             }
