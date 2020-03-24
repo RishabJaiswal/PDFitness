@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_external_session.*
 
 class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
 
-    lateinit var binding: ActivityExternalSessionBinding
+    private lateinit var binding: ActivityExternalSessionBinding
 
     private val viewModel by lazy {
         configureViewModel<ExternalSessionViewModel>()
