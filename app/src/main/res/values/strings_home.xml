@@ -31,4 +31,7 @@
     <string name="msg_blankslate_diet_plan">No diet plan yet</string>
     <string name="opt_diet_plan">Opt for a diet plan</string>
 
+    <!--online session-->
+    <string name="hint_offtime_session">Available at: %s</string>
+
 </resources>
