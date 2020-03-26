@@ -1,5 +1,6 @@
 package com.pune.dance.fitness.ui.external
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -26,7 +27,6 @@ class AdRequestActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ad_request)
-        rewardedAd = RewardedAd(this, getString(R.string.watch_online_session_ad_unit_id))
         initAdCallbacks()
         btn_watch_ad.setOnClickListener(this)
     }
@@ -47,10 +47,7 @@ class AdRequestActivity : BaseActivity(), View.OnClickListener {
                     tag = "AdRequest Error: $errorCode",
                     message = "Failed to load rewarded ad"
                 )
-                pb_ad_load.gone()
-                btn_watch_ad.visible()
-                toast(R.string.error_ad_load)
-                finish()
+                showAdError()
             }
         }
 
@@ -64,22 +61,42 @@ class AdRequestActivity : BaseActivity(), View.OnClickListener {
 
             override fun onRewardedAdClosed() {
                 // Ad closed.
+                closeScreenWithResult(Activity.RESULT_CANCELED)
             }
 
             override fun onUserEarnedReward(@NonNull reward: RewardItem) {
                 // User earned reward.
+                closeScreenWithResult(Activity.RESULT_OK)
             }
 
             override fun onRewardedAdFailedToShow(errorCode: Int) {
                 // Ad failed to display.
+                logError(
+                    tag = "AdRequest Error: $errorCode",
+                    message = "Failed to show rewarded ad"
+                )
+                showAdError()
             }
         }
+    }
+
+    private fun showAdError() {
+        pb_ad_load.gone()
+        btn_watch_ad.visible()
+        toast(R.string.error_ad_load)
+        closeScreenWithResult(Activity.RESULT_FIRST_USER)
+    }
+
+    private fun closeScreenWithResult(resultCode: Int) {
+        setResult(resultCode)
+        finish()
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.btn_watch_ad -> {
                 //load ad
+                rewardedAd = RewardedAd(this, getString(R.string.watch_online_session_ad_unit_id))
                 rewardedAd.loadAd(AdRequest.Builder().build(), adLoadCallback)
                 pb_ad_load.visible()
                 btn_watch_ad.gone()

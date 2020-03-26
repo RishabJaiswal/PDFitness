@@ -1,5 +1,6 @@
 package com.pune.dance.fitness.ui.external
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_external_session.*
 class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityExternalSessionBinding
+    private val AD_REQUEST_CODE = 108
 
     private val viewModel by lazy {
         configureViewModel<ExternalSessionViewModel>()
@@ -47,6 +49,25 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
         })
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == AD_REQUEST_CODE) {
+            when (resultCode) {
+
+                //user watched the ad
+                Activity.RESULT_OK -> {
+                    //todo: join workout
+                }
+
+                //user didn't watch the ad
+                Activity.RESULT_CANCELED -> {
+                    toast(R.string.error_online_session)
+                }
+            }
+        }
+    }
+
     override fun onClick(view: View?) {
         when (view?.id) {
 
@@ -61,7 +82,7 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
                                 show()
                             }
                     } else {
-                        startActivity(AdRequestActivity.getIntent(this))
+                        startActivityForResult(AdRequestActivity.getIntent(this), AD_REQUEST_CODE)
                     }
                 }
             }
