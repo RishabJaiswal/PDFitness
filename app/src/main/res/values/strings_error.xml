@@ -4,4 +4,5 @@
     <string name="error_invalid_otp">Invalid OTP</string>
     <string name="error_invalid_name">Please enter a valid name</string>
     <string name="error_unknown">Oops! Something went wrong</string>
+    <string name="error_ad_load">Failed to load ad</string>
 </resources>
