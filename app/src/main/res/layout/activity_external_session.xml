@@ -20,6 +20,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim_logo_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_session"
+            app:layout_constraintEnd_toEndOf="@+id/iv_session"
+            app:layout_constraintStart_toStartOf="@+id/iv_session"
+            app:layout_constraintTop_toTopOf="@+id/iv_session"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="options.json"
+            app:lottie_loop="true" />
+
+        <!--options-->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="16dp"
+            android:src="@drawable/ic_options"
+            android:tint="@color/berry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <!--artwork-->
         <ImageView
             android:id="@+id/iv_art_session"

@@ -23,14 +23,21 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
         configureViewModel<ExternalSessionViewModel>()
     }
 
+    private val optionsBottomsSheet by lazy {
+        OptionsBottomSheetFragment.newInstance()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_external_session)
         viewModel.fetchFitnessSessions()
         observeFitnessSession()
-        binding.btnSessionLink.setOnClickListener(this)
-        binding.btnShareSessionLink.setOnClickListener(this)
-        binding.hasWatchedAd = false
+        binding.apply {
+            btnSessionLink.setOnClickListener(this@ExternalSessionActivity)
+            btnShareSessionLink.setOnClickListener(this@ExternalSessionActivity)
+            btnOptions.setOnClickListener(this@ExternalSessionActivity)
+            hasWatchedAd = false
+        }
     }
 
     private fun observeFitnessSession() {
@@ -71,6 +78,7 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
 
+            //opn session link
             R.id.btn_session_link -> {
                 binding.onlineSession?.let { onlineSession ->
                     when {
@@ -110,6 +118,11 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
 
                 val shareIntent = Intent.createChooser(sendIntent, null)
                 startActivity(shareIntent)
+            }
+
+            //options
+            R.id.btn_options -> {
+                optionsBottomsSheet.show(supportFragmentManager, null)
             }
         }
     }
