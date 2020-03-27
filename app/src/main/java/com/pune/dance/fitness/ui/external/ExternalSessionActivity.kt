@@ -10,10 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.BaseActivity
-import com.pune.dance.fitness.application.extensions.configureViewModel
-import com.pune.dance.fitness.application.extensions.dpToPixels
-import com.pune.dance.fitness.application.extensions.gone
-import com.pune.dance.fitness.application.extensions.visible
+import com.pune.dance.fitness.application.extensions.*
 import com.pune.dance.fitness.databinding.ActivityExternalSessionBinding
 import kotlinx.android.synthetic.main.activity_external_session.*
 
@@ -32,6 +29,7 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
         viewModel.fetchFitnessSessions()
         observeFitnessSession()
         binding.btnSessionLink.setOnClickListener(this)
+        binding.hasWatchedAd = false
     }
 
     private fun observeFitnessSession() {
@@ -57,7 +55,8 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
 
                 //user watched the ad
                 Activity.RESULT_OK -> {
-                    //todo: join workout
+                    binding.hasWatchedAd = true
+                    binding.onlineSession?.link?.openLink(this)
                 }
 
                 //user didn't watch the ad
@@ -73,16 +72,26 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
 
             R.id.btn_session_link -> {
                 binding.onlineSession?.let { onlineSession ->
+                    when {
 
-                    if (onlineSession.link.isEmpty()) {
                         //empty link
-                        createToast(getString(R.string.hint_offtime_session, binding.onlineSession?.directions))
-                            .apply {
-                                setGravity(Gravity.TOP, 0, 16.dpToPixels(this@ExternalSessionActivity))
-                                show()
-                            }
-                    } else {
-                        startActivityForResult(AdRequestActivity.getIntent(this), AD_REQUEST_CODE)
+                        onlineSession.link.isEmpty() -> {
+                            createToast(getString(R.string.hint_offtime_session, binding.onlineSession?.directions))
+                                .apply {
+                                    setGravity(Gravity.TOP, 0, 16.dpToPixels(this@ExternalSessionActivity))
+                                    show()
+                                }
+                        }
+
+                        //rewarded ad not watched
+                        binding.hasWatchedAd != true -> startActivityForResult(
+                            AdRequestActivity.getIntent(this),
+                            AD_REQUEST_CODE
+                        )
+
+                        else -> {
+                            onlineSession.link.openLink(this)
+                        }
                     }
                 }
             }

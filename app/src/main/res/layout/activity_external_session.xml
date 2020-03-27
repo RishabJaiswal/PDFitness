@@ -6,6 +6,11 @@
 
     <data>
 
+        <!--flag for user watching rewarded ad-->
+        <variable
+            name="hasWatchedAd"
+            type="Boolean" />
+
         <variable
             name="onlineSession"
             type="com.pune.dance.fitness.api.profile.models.OnlineSession" />
@@ -50,10 +55,10 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            android:text="@{onlineSession.title}"
             android:textAlignment="center"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/txt_24"
-            android:text="@{onlineSession.title}"
             app:layout_constraintBottom_toTopOf="@+id/tv_session_direction"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,9 +72,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/montserrat_semibold"
+            android:text="@{onlineSession.directions}"
             android:textAlignment="center"
             android:textColor="@color/squash"
-            android:text="@{onlineSession.directions}"
             app:layout_constraintBottom_toTopOf="@+id/tv_message"
             app:layout_constraintEnd_toEndOf="@+id/tv_title"
             app:layout_constraintStart_toStartOf="@+id/tv_title"
@@ -93,21 +98,39 @@
             tools:text="Amid the ongoing COVID-19 pandemic, we have  decided to take fitness online" />
 
         <!--session link-->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_session_link"
             style="@style/filledUnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:backgroundTint="@{onlineSession.link.isEmpty() ? @color/disabledButton : @color/enabledFadedButton}"
+            android:text="@{onlineSession.actionPrimaryText}"
             android:textAllCaps="false"
             android:textColor="@{onlineSession.link.isEmpty() ? @color/textDisabled : @color/grapePurple}"
-            android:text="@{onlineSession.actionPrimaryText}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_share_session_link"
+            app:layout_constraintTop_toBottomOf="@+id/tv_message"
+            app:layout_constraintHorizontal_bias="0.5"
+            tools:text="Join Workout" />
+
+        <!--session share link-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_share_session_link"
+            style="@style/StrokedTextButton"
+            android:layout_marginTop="24dp"
+            app:visibleOrGone="@{!onlineSession.link.empty &amp;&amp; hasWatchedAd}"
+            android:text="@{onlineSession.actionSecondaryText}"
+            android:textAllCaps="false"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_session_link"
+            app:layout_constraintEnd_toStartOf="@+id/btn_session_link"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_message"
-            tools:text="Join Workout" />
+            tools:text="Share Session" />
 
         <!--group-->
         <androidx.constraintlayout.widget.Group
