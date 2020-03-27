@@ -33,5 +33,6 @@
 
     <!--online session-->
     <string name="hint_offtime_session">Available at: %s</string>
+    <string name="join_session_hint">Join Pune Dance Fitness\n%s</string>
 
 </resources>

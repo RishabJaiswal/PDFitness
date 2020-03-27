@@ -29,6 +29,7 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
         viewModel.fetchFitnessSessions()
         observeFitnessSession()
         binding.btnSessionLink.setOnClickListener(this)
+        binding.btnShareSessionLink.setOnClickListener(this)
         binding.hasWatchedAd = false
     }
 
@@ -94,6 +95,21 @@ class ExternalSessionActivity : BaseActivity(), View.OnClickListener {
                         }
                     }
                 }
+            }
+
+            //sharing session
+            R.id.btn_share_session_link -> {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        getString(R.string.join_session_hint, binding.onlineSession?.linkForSharing)
+                    )
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
             }
         }
     }

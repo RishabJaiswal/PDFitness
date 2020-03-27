@@ -1,8 +1,10 @@
 package com.pune.dance.fitness.api.profile.models
 
 import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.PropertyName
 
+@IgnoreExtraProperties
 data class FitnessSession(
 
     @get:PropertyName("_id")

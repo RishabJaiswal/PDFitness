@@ -1,7 +1,9 @@
 package com.pune.dance.fitness.api.profile.models
 
+import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.PropertyName
 
+@IgnoreExtraProperties
 data class OnlineSession(
 
     @get:PropertyName("title")
@@ -26,5 +28,9 @@ data class OnlineSession(
 
     @get:PropertyName("action_secondary")
     @set:PropertyName("action_secondary")
-    var actionSecondaryText: String = ""
+    var actionSecondaryText: String = "",
+
+    @get:PropertyName("link_share")
+    @set:PropertyName("link_share")
+    var linkForSharing: String = ""
 )
