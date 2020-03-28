@@ -1,4 +1,4 @@
-package com.pune.dance.fitness.ui.external
+package com.pune.dance.fitness.ui.online
 
 import android.os.Bundle
 import android.view.LayoutInflater

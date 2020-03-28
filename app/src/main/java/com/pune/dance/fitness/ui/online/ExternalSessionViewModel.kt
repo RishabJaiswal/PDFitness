@@ -1,4 +1,4 @@
-package com.pune.dance.fitness.ui.external
+package com.pune.dance.fitness.ui.online
 
 import androidx.lifecycle.ViewModel
 import com.pune.dance.fitness.api.profile.FitnessApiManager

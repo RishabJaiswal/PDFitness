@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.pune.dance.fitness.application.PreferenceHelper
 import com.pune.dance.fitness.application.PreferenceKeys
 import com.pune.dance.fitness.data.UserDao
-import com.pune.dance.fitness.ui.external.ExternalSessionActivity
 import com.pune.dance.fitness.ui.login.LoginActivity
+import com.pune.dance.fitness.ui.online.OnlineSessionActivity
 import com.pune.dance.fitness.ui.profile.edit.EditProfileActivity
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
             val hasUserCreatedProfile = PreferenceHelper.getValue<Boolean>(PreferenceKeys.USER_CREATED_PROFILE)
             startIntent = if (hasUserCreatedProfile) {
-                ExternalSessionActivity.getIntent(this)
+                OnlineSessionActivity.getIntent(this)
             } else {
                 EditProfileActivity.getIntent(this)
             }
