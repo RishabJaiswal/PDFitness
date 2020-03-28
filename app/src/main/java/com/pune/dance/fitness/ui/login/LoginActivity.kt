@@ -1,5 +1,7 @@
 package com.pune.dance.fitness.ui.login
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -162,6 +164,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 verifyOTP()
                 hideKeyboard(view)
             }
+        }
+    }
+
+    companion object {
+        fun getIntent(context: Context): Intent {
+            return Intent(context, LoginActivity::class.java)
         }
     }
 }

@@ -5,6 +5,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.BaseFragment
+import com.pune.dance.fitness.application.PreferenceHelper
+import com.pune.dance.fitness.application.PreferenceKeys
 import com.pune.dance.fitness.application.extensions.configureViewModel
 import com.pune.dance.fitness.application.extensions.invisible
 import com.pune.dance.fitness.application.extensions.visible
@@ -47,6 +49,7 @@ class EditProfileDoneFragment : BaseFragment(), View.OnClickListener {
                 group_progress_update_profile.visible()
             }, {
                 activity?.let { _activity ->
+                    PreferenceHelper.putValue(PreferenceKeys.USER_CREATED_PROFILE, true)
                     startActivity(ExternalSessionActivity.getIntent(_activity))
                     _activity.finish()
                 }
