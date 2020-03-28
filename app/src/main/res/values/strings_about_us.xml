@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="visit_us">Visit us</string>
+    <string name="visit_us_msg"><![CDATA[Watch & learn some\nawesome dance & fitness content]]></string>
+    <string name="link_brand_youtube">https://www.youtube.com/channel/UCapa5We3nCSxwAEOXf88XYA/videos</string>
+    <string name="link_brand_insta">https://www.instagram.com/pune_dance_fitness/</string>
+    <string name="link_brand_fb">https://www.facebook.com/punedancefitness/</string>
+    <string name="link_brand_website">https://www.punedancefitness.com/</string>
+</resources>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pune.dance.fitness.ui.about.AboutUsActivity">
+
+    <ImageView
+        android:id="@+id/imv_waves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/imv_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imv_logo"
+        app:srcCompat="@drawable/art_waves" />
+
+    <TextView
+        android:id="@+id/tv_brand_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/brand_name"
+        android:textColor="@color/berry"
+        android:textSize="@dimen/txt_title"
+        app:layout_constraintBottom_toTopOf="@+id/tv_brand_msg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imv_logo"
+        tools:text="Pune Dance Fitness" />
+
+    <ImageView
+        android:id="@+id/imv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/tv_brand_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/logo_vector" />
+
+    <TextView
+        android:id="@+id/tv_brand_msg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/brand_message"
+        android:textAlignment="center"
+        android:textColor="@color/textPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_brand_name" />
+
+    <TextView
+        android:id="@+id/tv_lbl_visit_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/visit_us"
+        android:textColor="@color/textPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/tv_visit_msg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_visit_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/visit_us_msg"
+        android:textAlignment="center"
+        android:textColor="@color/textPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/btn_visit_youtube"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lbl_visit_us" />
+
+    <ImageButton
+        android:alpha="0.48"
+        android:id="@+id/btn_visit_fb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_visit_youtube"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_visit_youtube"
+        app:layout_constraintTop_toTopOf="@+id/btn_visit_youtube"
+        app:srcCompat="@drawable/ic_fb_logo" />
+
+    <ImageButton
+        android:alpha="0.48"
+        android:id="@+id/btn_visit_insta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_visit_youtube"
+        app:layout_constraintEnd_toStartOf="@+id/btn_visit_youtube"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_visit_youtube"
+        app:srcCompat="@drawable/ic_instagram" />
+
+    <ImageButton
+        android:alpha="0.48"
+        android:id="@+id/btn_visit_youtube"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_visit_fb"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_visit_insta"
+        app:layout_constraintTop_toBottomOf="@+id/tv_visit_msg"
+        app:srcCompat="@drawable/ic_youtube" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

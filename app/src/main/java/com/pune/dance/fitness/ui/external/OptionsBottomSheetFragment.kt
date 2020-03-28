@@ -8,6 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pune.dance.fitness.BuildConfig
 import com.pune.dance.fitness.R
 import com.pune.dance.fitness.application.extensions.openLink
+import com.pune.dance.fitness.ui.about.AboutUsActivity
 import com.pune.dance.fitness.ui.profile.edit.EditProfileActivity
 import kotlinx.android.synthetic.main.frag_options_online_session_home.*
 
@@ -36,7 +37,7 @@ class OptionsBottomSheetFragment : BottomSheetDialogFragment(), View.OnClickList
 
                 //about us
                 R.id.tv_option_about_us -> {
-
+                    startActivity(AboutUsActivity.getIntent(_context))
                 }
 
                 //rate app
