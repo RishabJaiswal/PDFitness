@@ -32,9 +32,16 @@ class LoginViewModel : ViewModel() {
     private var timer: CountDownTimer? = null
     private val OTP_TIMER_MILLIS = 120000L
     private val OTP_TIMER_INTERVAL = 1000L
+    private val CC_INIDA = "+91"
 
     //verifying number
-    fun verifyMobileNumber(mobileNo: String) {
+    fun verifyMobileNumber(userInputMobileNo: String) {
+
+        var mobileNo = userInputMobileNo
+        if (userInputMobileNo.startsWith("+91").not()) {
+            mobileNo = CC_INIDA + userInputMobileNo
+        }
+
         /**this is a VerificationToken which has a ForceResendingToken*/
         var resendVerificationToken: VerificationToken? = null
         if (mobileNo == verifiedMobileNo) {
