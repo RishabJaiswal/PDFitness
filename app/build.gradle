@@ -5,6 +5,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
+def getGitHash = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -13,9 +22,21 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "v0.8.8-${getGitHash()}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    //setting apk name
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            //changes the generated .apk name
+            if (variant.name.contains("release")) {
+                def formattedDate = new Date().format('dd.MM.yy_HHmm')
+                outputFileName = "PDFitnes_${variant.name}_${variant.versionCode}_${formattedDate}_${getGitHash()}.apk"
+            }
+        }
+    }
+
     dataBinding {
         enabled = true
     }
@@ -29,12 +50,14 @@ android {
             applicationIdSuffix ".debug"
             resValue "string", "admob_app_id", "ca-app-pub-3940256099942544~3347511713"
             resValue "string", "watch_online_session_ad_unit_id", "ca-app-pub-3940256099942544/5224354917"
+            buildConfigField("String", "BASE_URL", '"debug/9hzDw5sP5UTQbXfVWbiR"')
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             resValue "string", "admob_app_id", "ca-app-pub-4200151682628675~5184025564"
             resValue "string", "watch_online_session_ad_unit_id", "ca-app-pub-4200151682628675/3862849810"
+            buildConfigField("String", "BASE_URL", '"production/jj4S8ZL4CVyPw53ZTXxq"')
         }
     }
 }
