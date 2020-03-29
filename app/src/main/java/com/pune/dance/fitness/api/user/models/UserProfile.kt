@@ -23,16 +23,13 @@ open class UserProfile : RealmModel {
     @set:PropertyName("mobile_number")
     var mobileNo: String = ""
 
-
     @get:PropertyName("fitness_session_id")
     @set:PropertyName("fitness_session_id")
     var fitness_session_id: String = ""
 
-
     @get:PropertyName("session_timing_id")
     @set:PropertyName("session_timing_id")
     var session_timing_id: String = ""
-
 
     @get:PropertyName("diet_plan_id")
     @set:PropertyName("diet_plan_id")
