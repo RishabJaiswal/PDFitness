@@ -30,7 +30,7 @@ class LoginViewModel : ViewModel() {
     private var verifiedMobileNo: String = ""
     private val userDao = UserDao()
     private var timer: CountDownTimer? = null
-    private val OTP_TIMER_MILLIS = 10000L
+    private val OTP_TIMER_MILLIS = 120000L
     private val OTP_TIMER_INTERVAL = 1000L
 
     //verifying number
