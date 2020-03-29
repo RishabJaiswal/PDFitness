@@ -19,3 +19,13 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#To preserve the info Crashlytics needs for readable crash reports
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+-keep public class * extends java.lang.Exception
+
+#Source: https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=android
+#For faster builds with ProGuard, exclude Crashlytics
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
