@@ -33,7 +33,7 @@ android {
             //changes the generated .apk name
             if (variant.name.contains("release")) {
                 def formattedDate = new Date().format('dd.MM.yy_HHmm')
-                outputFileName = "PDFitnes_${variant.name}_${formattedDate}_${variant.versionName}.apk"
+                outputFileName = "PDFitness_${variant.name}_${formattedDate}_${variant.versionName}.apk"
             }
         }
     }
