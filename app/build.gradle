@@ -46,8 +46,9 @@ android {
     buildTypes {
         debug {
             debuggable true
-            minifyEnabled false
             applicationIdSuffix ".debug"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             resValue "string", "admob_app_id", "ca-app-pub-3940256099942544~3347511713"
             resValue "string", "watch_online_session_ad_unit_id", "ca-app-pub-3940256099942544/5224354917"
             buildConfigField("String", "BASE_URL", '"debug/9hzDw5sP5UTQbXfVWbiR"')
