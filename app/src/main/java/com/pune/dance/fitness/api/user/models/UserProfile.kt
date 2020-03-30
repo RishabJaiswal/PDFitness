@@ -1,5 +1,6 @@
 package com.pune.dance.fitness.api.user.models
 
+import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.PropertyName
 import io.realm.RealmModel
@@ -10,29 +11,29 @@ import io.realm.annotations.RealmClass
 @RealmClass
 open class UserProfile : RealmModel {
 
-    @get:PropertyName("user_id")
-    @set:PropertyName("user_id")
+    @get:Exclude
+    @PropertyName("user_id")
     @PrimaryKey
     var userId: String = ""
 
-    @get:PropertyName("name")
-    @set:PropertyName("name")
+    @get:Exclude
+    @PropertyName("name")
     var displayName: String = ""
 
-    @get:PropertyName("mobile_number")
-    @set:PropertyName("mobile_number")
+    @get:Exclude
+    @PropertyName("mobile_number")
     var mobileNo: String = ""
 
-    @get:PropertyName("fitness_session_id")
-    @set:PropertyName("fitness_session_id")
+    @get:Exclude
+    @PropertyName("fitness_session_id")
     var fitness_session_id: String = ""
 
-    @get:PropertyName("session_timing_id")
-    @set:PropertyName("session_timing_id")
+    @get:Exclude
+    @PropertyName("session_timing_id")
     var session_timing_id: String = ""
 
-    @get:PropertyName("diet_plan_id")
-    @set:PropertyName("diet_plan_id")
+    @get:Exclude
+    @PropertyName("diet_plan_id")
     var dietPlanId: String = ""
 
 }
