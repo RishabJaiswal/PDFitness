@@ -21,6 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 #To preserve the info Crashlytics needs for readable crash reports
+-keepattributes Signature
 -keepattributes *Annotation*
 -keepattributes SourceFile,LineNumberTable
 -keep public class * extends java.lang.Exception
@@ -29,3 +30,6 @@
 #For faster builds with ProGuard, exclude Crashlytics
 -keep class com.crashlytics.** { *; }
 -dontwarn com.crashlytics.**
+
+# Keep custom model classes
+-keepclassmembers class com.pune.dance.fitness.api.*.models.** { *; }
