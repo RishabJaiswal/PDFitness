@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:animateLayoutChanges="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.pune.dance.fitness.ui.home.HomeActivity"
+        android:animateLayoutChanges="true">
+
+        <!--profile pic-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/imv_profile_pic"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_url="@string/profile_pic_default_url"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <!--profile name-->
+        <TextView
+            android:id="@+id/tv_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/txt_20"
+            android:text="Rishab Jaiswal"
+            app:layout_constraintBottom_toBottomOf="@+id/imv_profile_pic"
+            app:layout_constraintStart_toEndOf="@+id/imv_profile_pic"
+            app:layout_constraintTop_toTopOf="@+id/imv_profile_pic"
+            tools:text="Profile Name" />
+
+        <!--attendance-->
+        <TextView
+            android:id="@+id/tv_label_attendance"
+            style="@style/homeLabel"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/attendance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imv_profile_pic" />
+
+        <!--attendance dates-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_attendance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:paddingEnd="24dp"
+            android:clipToPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_attendance"
+            tools:listitem="@layout/item_home_attendance_calendar" />
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/rv_attendance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!--payments-->
+        <TextView
+            android:id="@+id/tv_lbl_payments"
+            style="@style/homeLabel"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/lbl_payments"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/container" />
+
+        <!--payments list-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_payments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="24dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lbl_payments"
+            tools:listitem="@layout/item_payment_home" />
+
+
+        <!--diet plan-->
+        <TextView
+            android:id="@+id/tv_lbl_diet_plan"
+            style="@style/homeLabel"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/lbl_diet_plan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_payments" />
+
+        <!--guideline-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_diet_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <!--diet plan blank slate message-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imv_diet_plan"
+            android:layout_width="172dp"
+            android:layout_height="0dp"
+            android:maxWidth="172dp"
+            android:src="@drawable/blankslate_diet_plan"
+            app:layout_constraintDimensionRatio="w,290:242"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_diet_plan"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lbl_diet_plan" />
+
+        <!--diet blankslate message-->
+        <TextView
+            android:id="@+id/tv_blankslate_diet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_blankslate_diet_plan"
+            android:textColor="@color/textSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_diet_plan"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lbl_diet_plan" />
+
+        <!--select diet plan-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_select_diet_plan"
+            style="@style/filledUnelevatedButton"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/squash"
+            android:text="@string/opt_diet_plan"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_diet_plan"
+            app:layout_constraintTop_toBottomOf="@+id/tv_blankslate_diet" />
+
+        <!--diet plan blankslate-->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/blankslate_diet_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv_blankslate_diet, btn_select_diet_plan" />
+
+        <!--diet plan-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_diet_plan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingStart="150dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lbl_diet_plan"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_home_diet_plan" />
+
+        <!--progress for diet plan-->
+        <FrameLayout
+            android:id="@+id/progress_diet_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_diet_plan"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lbl_diet_plan">
+
+            <include
+                layout="@layout/item_home_diet_plan"
+                android:layout_width="132dp"
+                android:layout_height="194dp" />
+
+            <ProgressBar
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:indeterminateTint="@color/pumpkinOrange"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

@@ -1,29 +1,81 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
     android:paddingStart="32dp"
     android:paddingEnd="32dp">
 
 
+    <!--confetti animation-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/anim_confetti"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_msg_edit_profile_done"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="false"
+        app:lottie_fileName="confetti.json"
+        tools:layout_editor_absoluteX="32dp" />
+
+
     <!--title-->
     <TextView
+        android:id="@+id/tv_title_edit_profile_done"
         style="@style/editProfileTitle"
-        android:text="@string/edit_profile_done_title" />
+        android:text="@string/edit_profile_done_title"
+        app:layout_constraintBottom_toTopOf="@+id/tv_msg_edit_profile_done"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <!--subtitle-->
     <TextView
+        android:id="@+id/tv_msg_edit_profile_done"
         style="@style/editProfileSubTitle"
-        android:text="@string/edit_profile_done_subtitle" />
+        android:text="@string/edit_profile_done_subtitle"
+        app:layout_constraintBottom_toTopOf="@+id/btn_take_home"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_edit_profile_done"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_edit_profile_done" />
 
     <!--take home-->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_take_home"
         style="@style/filledElevatedButton"
         android:layout_marginTop="32dp"
+        android:text="@string/take_me_home"
         android:textAllCaps="false"
-        android:text="@string/take_me_home"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_msg_edit_profile_done"
+        app:layout_constraintTop_toBottomOf="@+id/tv_msg_edit_profile_done" />
 
-</LinearLayout>
+    <!--progress for updating user's profile-->
+    <ProgressBar
+        android:id="@+id/pb_profile_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_msg_edit_profile_done"
+        app:layout_constraintTop_toBottomOf="@+id/tv_msg_edit_profile_done" />
+
+
+    <!--progress mesage for updating user's profile-->
+    <TextView
+        android:id="@+id/tv_profile_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_profile_update"
+        android:textColor="@color/grapePurple"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pb_profile_update"
+        app:layout_constraintStart_toEndOf="@+id/pb_profile_update"
+        app:layout_constraintTop_toTopOf="@+id/pb_profile_update" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_progress_update-profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="pb_profile_update,tv_profile_update"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

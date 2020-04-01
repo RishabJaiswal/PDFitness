@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="attendance">Attendance</string>
+
+    <!--marking attendance-->
+    <string name="attendance_ask_presence">Will you be attending today?</string>
+    <string name="attendance_ask_presence_msg">You have been regular and extremely passionate. Don\'t miss the class!</string>
+    <string name="attendance_ask_action_primary">Yes, Let\'s do it</string>
+    <string name="attendance_ask_action_secondary">No</string>
+
+    <!--marked present-->
+    <string name="attendance_marked_present_title">Cheers</string>
+    <string name="attendance_marked_present_msg">You are awesome. You are joining today. Hope there are no change of plans.</string>
+    <string name="attendance_marked_present_action_secondary">I had a change of plans</string>
+
+    <!--marked absent-->
+    <string name="attendance_marked_absent_title">Why?</string>
+    <string name="attendance_marked_absent_msg">Why won\'t you join the fun today. It will be amazing if you join the class. Would you like to join?</string>
+    <string name="attendance_marked_absent_action_primary">Yes, let\'s do it</string>
+
+    <!--attendance calendar status-->
+    <string name="attendance_status_present">Worked out! :)</string>
+    <string name="attendance_status_absent">Missed it! :(</string>
+    <string name="attendance_status_no_session">No session</string>
+
+    <!--payments-->
+    <string name="lbl_payments">Payments</string>
+
+    <!--diet plan-->
+    <string name="lbl_diet_plan">Diet Plan</string>
+    <string name="msg_blankslate_diet_plan">No diet plan yet</string>
+    <string name="opt_diet_plan">Opt for a diet plan</string>
+
+    <!--online session-->
+    <string name="hint_offtime_session">Available at: %s</string>
+    <string name="join_session_hint">Join Pune Dance Fitness\n%s</string>
+
+</resources>

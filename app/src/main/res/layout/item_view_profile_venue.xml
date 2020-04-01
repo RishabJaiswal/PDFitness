@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="24dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="#FFC330">
+
+    <!--profile key-->
+    <TextView
+        android:id="@+id/tv_profile_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/txt_body"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_profile_value"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_profile_value"
+        tools:text="Diet plan" />
+
+
+    <!--profile key's valu-->
+    <TextView
+        android:id="@+id/tv_profile_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/txt_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="3 weeks" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_get_directions"
+        style="@style/filledUnelevatedButton"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="1dp"
+        android:backgroundTint="@color/pumpkinOrange"
+        android:text="@string/get_directions"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_profile_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_value"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

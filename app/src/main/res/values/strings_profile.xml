@@ -14,4 +14,5 @@
     <string name="edit_profile_done_title">You are awesome!</string>
     <string name="edit_profile_done_subtitle">We wanted you to know that you are awesome for selecting a healthy and fruitful lifestyle. Your profile will be updated soon.</string>
     <string name="take_me_home">Cool, take me home</string>
+    <string name="profile_pic_default_url">https://assets6.lottiefiles.com/datafiles/HV6jEnEyxA7NmjZ/data.json</string>
 </resources>

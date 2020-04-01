@@ -2,7 +2,7 @@
 <resources>
     <string name="login">Login</string>
     <string name="login_first_field_label">mobile number</string>
-    <string name="login_field_password">password</string>
+    <string name="login_field_password">enter OTP</string>
     <string name="label_terms"><u>*terms &amp; conditions</u></string>
     <string name="login_button">Go</string>
     <string name="resend_otp">resend otp</string>

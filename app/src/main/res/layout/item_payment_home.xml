@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:layout_marginStart="16dp"
+    android:background="@drawable/rectangle_stroked_rc_10">
+
+    <!--month and year-->
+    <TextView
+        android:id="@+id/tv_month_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textPrimary"
+        tools:text="June 2020" />
+
+
+    <!--month's payment-->
+    <TextView
+        android:id="@+id/tv_month_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/squash"
+        android:fontFamily="@font/montserrat_semibold"
+        android:layout_marginTop="8dp"
+        tools:text="₹ 1800 Pending" />
+
+</LinearLayout>

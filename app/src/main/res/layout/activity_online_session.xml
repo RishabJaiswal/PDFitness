@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.pune.dance.fitness.ui.online.OnlineSessionActivity">
+
+    <data>
+
+        <!--flag for user watching rewarded ad-->
+        <variable
+            name="hasWatchedAd"
+            type="Boolean" />
+
+        <variable
+            name="onlineSession"
+            type="com.pune.dance.fitness.api.profile.models.OnlineSession" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim_logo_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_session"
+            app:layout_constraintEnd_toEndOf="@+id/iv_session"
+            app:layout_constraintStart_toStartOf="@+id/iv_session"
+            app:layout_constraintTop_toTopOf="@+id/iv_session"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="options.json"
+            app:lottie_loop="true" />
+
+        <!--options-->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="16dp"
+            android:src="@drawable/ic_options"
+            android:tint="@color/berry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_session_link" />
+
+        <!--artwork-->
+        <ImageView
+            android:id="@+id/iv_art_session"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/art_external_session"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_session_link"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <!--image for session [Logo]-->
+        <ImageView
+            android:id="@+id/iv_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35000002"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:srcCompat="@drawable/logo_vector" />
+
+        <!--title-->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@{onlineSession.title}"
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/txt_24"
+            app:layout_constraintBottom_toTopOf="@+id/tv_session_direction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_session"
+            tools:text="We are working out online" />
+
+        <!--session direction-->
+        <TextView
+            android:id="@+id/tv_session_direction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat_semibold"
+            app:parseHtml="@{onlineSession.directions}"
+            android:textAlignment="center"
+            android:textColor="@color/squash"
+            app:layout_constraintBottom_toTopOf="@+id/tv_message"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="Today, 7 pm" />
+
+        <!--session message-->
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/textPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/btn_session_link"
+            app:layout_constraintEnd_toEndOf="@+id/tv_session_direction"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_session_direction"
+            app:layout_constraintTop_toBottomOf="@+id/tv_session_direction"
+            app:parseHtml="@{onlineSession.message}"
+            tools:text="Amid the ongoing COVID-19 pandemic, we have  decided to take fitness online" />
+
+        <!--session link-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_session_link"
+            style="@style/filledUnelevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@{onlineSession.link.isEmpty() ? @color/disabledButton : @color/enabledFadedButton}"
+            android:text="@{onlineSession.actionPrimaryText}"
+            android:textAllCaps="false"
+            android:textColor="@{onlineSession.link.isEmpty() ? @color/textDisabled : @color/grapePurple}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_share_session_link"
+            app:layout_constraintTop_toBottomOf="@+id/tv_message"
+            app:layout_constraintHorizontal_bias="0.5"
+            tools:text="Join Workout" />
+
+        <!--session share link-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_share_session_link"
+            style="@style/StrokedTextButton"
+            android:layout_marginTop="24dp"
+            app:visibleOrGone="@{onlineSession == null ? false : (!onlineSession.link.empty &amp;&amp; (!onlineSession.showAd || hasWatchedAd))}"
+            android:text="@{onlineSession.actionSecondaryText}"
+            android:textAllCaps="false"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_session_link"
+            app:layout_constraintEnd_toStartOf="@+id/btn_session_link"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_message"
+            tools:text="Share Session" />
+
+        <!--group-->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_session_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="tv_title,tv_message,tv_session_direction,btn_session_link"
+            tools:visibility="visible" />
+
+        <!--progress-->
+        <ProgressBar
+            android:id="@+id/pb_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/iv_art_session"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_session" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

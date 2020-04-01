@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.pune.dance.fitness.ui.home.fragments.AttendanceFragment">
+
+    <data>
+
+        <import type="com.pune.dance.fitness.ui.home.models.AttendanceStatus" />
+
+        <variable
+            name="fragment"
+            type="com.pune.dance.fitness.ui.home.fragments.AttendanceFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.pune.dance.fitness.ui.home.HomeViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+        <!--giudeline-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_mark_attendance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <!--attendance presence background scrim-->
+        <View
+            android:id="@+id/scrim_attendance"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/barrier_actions"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--attendance image-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imv_attendance"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:foregroundGravity="right"
+            android:src="@drawable/art_attendance_ask"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="@+id/scrim_attendance"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_mark_attendance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--mark attendance title-->
+        <TextView
+            android:id="@+id/tv_mark_attend_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@{viewModel.getAttendanceTitle(viewModel.nextSessionAttendanceLiveResult.getResult())}"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/txt_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_mark_attendance"
+            app:layout_constraintTop_toTopOf="@+id/scrim_attendance" />
+
+        <!--mark attendance msg-->
+        <TextView
+            android:id="@+id/tv_mark_attend_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{viewModel.getAttendanceMsg(viewModel.nextSessionAttendanceLiveResult.getResult())}"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/txt_caption"
+            app:layout_constraintEnd_toEndOf="@+id/tv_mark_attend_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_mark_attend_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mark_attend_title" />
+
+        <!--attendance primary action-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_action_primary"
+            style="@style/TextButton"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.getAttendancePrimaryAction(viewModel.nextSessionAttendanceLiveResult.getResult())}"
+            android:textAllCaps="false"
+            android:textColor="@color/textPrimary"
+            app:layout_constraintEnd_toEndOf="@+id/tv_mark_attend_msg"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mark_attend_msg"
+            app:visibleOrGone="@{viewModel.nextSessionAttendanceLiveResult.getResult() != AttendanceStatus.PRESENT}" />
+
+        <!--attendance secondary action-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_action_secondary"
+            style="@style/TextButton"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{viewModel.getAttendanceSecondaryAction(viewModel.nextSessionAttendanceLiveResult.getResult())}"
+            android:textAllCaps="false"
+            android:textColor="@color/textSecondary"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toStartOf="@+id/btn_action_primary"
+            app:layout_constraintStart_toStartOf="@+id/guideline_mark_attendance"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mark_attend_msg"
+            app:visibleOrGone="@{viewModel.nextSessionAttendanceLiveResult.getResult() != AttendanceStatus.ABSENT}" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_actions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="btn_action_secondary, btn_action_primary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
