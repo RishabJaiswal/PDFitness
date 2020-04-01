@@ -24,6 +24,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         setContentView(R.layout.activity_login)
         btn_login.setOnClickListener(this)
         btn_get_otp.setOnClickListener(this)
+        btn_privacy_policy.setOnClickListener(this)
 
         /**observing verification of mobile no*/
         viewModel.verificationTokenLiveResult.observe(this, Observer {
@@ -163,6 +164,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             R.id.btn_login -> {
                 verifyOTP()
                 hideKeyboard(view)
+            }
+
+            //privacy policy
+            R.id.btn_privacy_policy -> {
+                getString(R.string.link_privacy_policy).openLink(this)
             }
         }
     }
