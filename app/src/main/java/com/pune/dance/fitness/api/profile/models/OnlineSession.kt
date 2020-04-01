@@ -32,5 +32,10 @@ data class OnlineSession(
 
     @get:PropertyName("link_share")
     @set:PropertyName("link_share")
-    var linkForSharing: String = ""
+    var linkForSharing: String = "",
+
+    @get:PropertyName("show_ad")
+    @set:PropertyName("show_ad")
+    var showAd: Boolean = true
+
 )

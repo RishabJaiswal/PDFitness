@@ -93,7 +93,7 @@ class OnlineSessionActivity : BaseActivity(), View.OnClickListener {
                         }
 
                         //rewarded ad not watched
-                        binding.hasWatchedAd != true -> startActivityForResult(
+                        onlineSession.showAd && binding.hasWatchedAd != true -> startActivityForResult(
                             AdRequestActivity.getIntent(this),
                             AD_REQUEST_CODE
                         )
