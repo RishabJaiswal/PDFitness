@@ -188,9 +188,10 @@
 
     <!--terms and consitions-->
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_privacy_policy"
         style="@style/TextButton"
         android:fontFamily="@font/montserrat"
-        android:text="@string/label_terms"
+        android:text="@string/privacy_policy"
         android:textAllCaps="false"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/txt_caption"

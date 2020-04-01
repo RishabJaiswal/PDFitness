@@ -1,6 +1,7 @@
 package com.pune.dance.fitness.application.extensions
 
 import android.util.Log
+import com.crashlytics.android.Crashlytics
 import com.pune.dance.fitness.BuildConfig
 
 fun Any.logError(
@@ -71,13 +72,13 @@ private fun Any.log(type: Int, tag: String?, message: String?, throwable: Throwa
 }
 
 fun logToCrashlytics(logTag: String, message: String?, throwable: Throwable? = null) {
-    /*if (throwable != null) {
+    if (throwable != null) {
         Crashlytics.logException(throwable)
     }
 
     if (message != null) {
         Crashlytics.log(Log.ERROR, logTag, message)
-    }*/
+    }
 }
 
 // if tag is not specified it will take the name of the class from which the log has been printed

@@ -1,5 +1,7 @@
 package com.pune.dance.fitness.ui.login
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -22,6 +24,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         setContentView(R.layout.activity_login)
         btn_login.setOnClickListener(this)
         btn_get_otp.setOnClickListener(this)
+        btn_privacy_policy.setOnClickListener(this)
 
         /**observing verification of mobile no*/
         viewModel.verificationTokenLiveResult.observe(this, Observer {
@@ -162,6 +165,17 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 verifyOTP()
                 hideKeyboard(view)
             }
+
+            //privacy policy
+            R.id.btn_privacy_policy -> {
+                getString(R.string.link_privacy_policy).openLink(this)
+            }
+        }
+    }
+
+    companion object {
+        fun getIntent(context: Context): Intent {
+            return Intent(context, LoginActivity::class.java)
         }
     }
 }

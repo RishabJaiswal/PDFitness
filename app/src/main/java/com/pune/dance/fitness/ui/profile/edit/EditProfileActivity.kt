@@ -31,6 +31,7 @@ class EditProfileActivity : BaseActivity() {
     private fun setEditProfileSlides() {
         val editProfileAdapter = EditProfileAdapter(supportFragmentManager, lifecycle)
         vp_edit_profile.adapter = editProfileAdapter
+        vp_edit_profile.isUserInputEnabled = false
         pb_edit_profile.max = editProfileAdapter.itemCount
 
         vp_edit_profile.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

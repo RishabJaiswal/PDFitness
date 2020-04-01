@@ -1,6 +1,7 @@
 package com.pune.dance.fitness.api.attendance
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.pune.dance.fitness.BuildConfig
 import com.pune.dance.fitness.api.attendance.models.Attendance
 import com.pune.dance.fitness.application.extensions.parseToModelsList
 import io.reactivex.BackpressureStrategy
@@ -17,7 +18,7 @@ class AttendanceApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThre
     fun getAttendance(userId: String, sessionId: String, startDate: Date, endDate: Date): Flowable<List<Attendance>> {
         return Flowable.create<List<Attendance>>({ emitter ->
             firestoreDb
-                .collection("session_attendance")
+                .collection("${BuildConfig.BASE_URL}/session_attendance")
                 .whereEqualTo("user_id", userId)
                 .whereEqualTo("session_id", sessionId)
                 /*.whereGreaterThanOrEqualTo("date", startDate)
@@ -37,7 +38,8 @@ class AttendanceApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThre
         return Completable.create { emitter ->
 
             //creating attendance document
-            val document = firestoreDb.collection("session_attendance")
+            val document = firestoreDb
+                .collection("${BuildConfig.BASE_URL}/session_attendance")
                 .let { collectionRef ->
                     if (attendance.id.isEmpty()) {
                         collectionRef.document().apply {

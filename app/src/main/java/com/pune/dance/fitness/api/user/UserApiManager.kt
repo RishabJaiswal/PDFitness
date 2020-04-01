@@ -2,6 +2,7 @@ package com.pune.dance.fitness.api.user
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.pune.dance.fitness.BuildConfig
 import com.pune.dance.fitness.api.user.models.User
 import com.pune.dance.fitness.api.user.models.UserProfile
 import io.reactivex.Scheduler
@@ -34,7 +35,9 @@ class UserApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThread()) 
     //saving user profile
     fun getUserProfile(userId: String): Single<UserProfile> {
         return Single.create<UserProfile> { emitter ->
-            firestoreDB.document("user_profiles/${userId}")
+            firestoreDB
+                .collection("${BuildConfig.BASE_URL}/user_profiles")
+                .document(userId)
                 .get()
                 .addOnSuccessListener { document ->
                     //success
@@ -52,7 +55,9 @@ class UserApiManager(val scheduler: Scheduler = AndroidSchedulers.mainThread()) 
     /**create or update userProfile with the given user profile*/
     fun setUserProfile(userId: String, profile: UserProfile): Single<UserProfile> {
         return Single.create<UserProfile> { emitter ->
-            firestoreDB.document("user_profiles/${userId}")
+            firestoreDB
+                .collection("${BuildConfig.BASE_URL}/user_profiles")
+                .document(userId)
                 .set(profile)
                 .addOnSuccessListener {
                     emitter.onSuccess(profile)

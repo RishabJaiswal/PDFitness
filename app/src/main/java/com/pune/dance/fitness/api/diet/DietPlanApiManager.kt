@@ -1,6 +1,7 @@
 package com.pune.dance.fitness.api.diet
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.pune.dance.fitness.BuildConfig
 import com.pune.dance.fitness.api.diet.models.DietPlan
 import com.pune.dance.fitness.application.exceptions.ContentNotFoundException
 import io.reactivex.BackpressureStrategy
@@ -14,7 +15,8 @@ class DietPlanApiManager {
         return Flowable.create<DietPlan>({ emitter ->
 
             //accessing diet plan
-            firestoreDb.collection("diet_plans")
+            firestoreDb
+                .collection("${BuildConfig.BASE_URL}/diet_plans")
                 .document(dietPlanId)
                 .addSnapshotListener { snapshot, exception ->
 
